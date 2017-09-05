@@ -51,16 +51,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChbtcApi.cs" />
+    <Compile Include="Services\SignUtility.cs" />
     <Compile Include="ErrorCode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QuotationServices.cs" />
-    <Compile Include="TradeServices.cs" />
+    <Compile Include="Services\Models\ReponseModel.cs" />
+    <Compile Include="Services\Models\TickerModel.cs" />
+    <Compile Include="Services\QuotationServices.cs" />
+    <Compile Include="Services\TradeServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\AutoSniper.Framework\AutoSniper.Framework.csproj">
+      <Project>{799750e7-a9fd-477d-987c-075fe22ec121}</Project>
+      <Name>AutoSniper.Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -57,7 +57,7 @@ namespace AutoSniper.Framework.Logger
                     return;
                 }
 
-                filePath = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Config"), configFile);
+                filePath = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logger/config"), configFile);
 
                 if (File.Exists(filePath))
                 {
