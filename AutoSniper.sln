@@ -3,15 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSniper.Main", "AutoSniper.Main\AutoSniper.Main.csproj", "{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{BECF18A5-1DFC-4810-B5BE-9A92517A09AF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSniper.Framework", "Framework\AutoSniper.Framework\AutoSniper.Framework.csproj", "{799750E7-A9FD-477D-987C-075FE22EC121}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{580142D8-B731-4F6D-9BBF-1C2A5DADA75A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSniper.Framework.Test", "Test\AutoSniper.Framework.Test\AutoSniper.Framework.Test.csproj", "{0D2E6CF5-30AA-4A53-86D2-ABF296C8360C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSniper.UnitTest", "Test\AutoSniper.Framework.Test\AutoSniper.UnitTest.csproj", "{0D2E6CF5-30AA-4A53-86D2-ABF296C8360C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSniper.ClientWPF", "AutoSniper.ClientWPF\AutoSniper.ClientWPF.csproj", "{25DB5821-050C-49B5-A87E-B194BA95859A}"
 EndProject
@@ -27,22 +21,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Debug|ARM.Build.0 = Debug|Any CPU
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Debug|x64.Build.0 = Debug|Any CPU
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Debug|x86.Build.0 = Debug|Any CPU
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Release|ARM.ActiveCfg = Release|Any CPU
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Release|ARM.Build.0 = Release|Any CPU
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Release|x64.ActiveCfg = Release|Any CPU
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Release|x64.Build.0 = Release|Any CPU
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Release|x86.ActiveCfg = Release|Any CPU
-		{F6FA84F6-BE2D-47F3-953D-BBA5ACA07857}.Release|x86.Build.0 = Release|Any CPU
 		{799750E7-A9FD-477D-987C-075FE22EC121}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{799750E7-A9FD-477D-987C-075FE22EC121}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{799750E7-A9FD-477D-987C-075FE22EC121}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -94,9 +72,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{799750E7-A9FD-477D-987C-075FE22EC121} = {BECF18A5-1DFC-4810-B5BE-9A92517A09AF}
-		{0D2E6CF5-30AA-4A53-86D2-ABF296C8360C} = {580142D8-B731-4F6D-9BBF-1C2A5DADA75A}
 	EndGlobalSection
 EndGlobal

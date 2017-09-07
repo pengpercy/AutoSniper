@@ -6,7 +6,7 @@ using System.Text;
 using System.Net;
 using System.IO;
 
-namespace AutoSniper.Main
+namespace AutoSniper.ClientWPF.Services
 {
     class SignUtility
     {

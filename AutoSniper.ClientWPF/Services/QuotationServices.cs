@@ -1,6 +1,6 @@
-﻿using AutoSniper.Framework.Converter;
+﻿using AutoSniper.ClientWPF.Services.Models;
+using AutoSniper.Framework.Converter;
 using AutoSniper.Framework.Logger;
-using AutoSniper.Main.Services.Models;
 using Newtonsoft.Json.Linq;
 using ServiceStack.Text;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoSniper.Main
+namespace AutoSniper.ClientWPF.Services
 {
     public class QuotationServices
     {

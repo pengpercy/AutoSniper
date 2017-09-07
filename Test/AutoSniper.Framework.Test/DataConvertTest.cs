@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AutoSniper.Framework.Converter;
 
-namespace AutoSniper.Framework.Test
+namespace AutoSniper.UnitTest
 {
     [TestClass]
     public class DataConvertTest
