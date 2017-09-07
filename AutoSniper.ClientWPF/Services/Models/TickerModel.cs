@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoSniper.Main.Services.Models
+namespace AutoSniper.ClientWPF.Services.Models
 {
     public class TickerModel
     {

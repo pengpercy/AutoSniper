@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoSniper.Main
+namespace AutoSniper.ClientWPF.Services
 {
     public class TradeServices
     {

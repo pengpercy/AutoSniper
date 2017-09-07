@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoSniper.Main
+namespace AutoSniper.ClientWPF.Services.Models
 {
     public enum ErrorCode
     {
