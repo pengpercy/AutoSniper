@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AutoSniper.ClientWPF.Services.Models
 {
-    public class ReponseModel
+    public class ResponseModel
     {
         public string Code { get; set; }
         public string Message { get; set; }

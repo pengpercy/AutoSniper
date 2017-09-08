@@ -14,7 +14,7 @@ namespace AutoSniper.Framework.Converter
             return JsonConvert.SerializeObject(obj);
         }
 
-        public static T FromJson<T>(this string obj)
+        public static T FromJSON<T>(this string obj)
         {
             return JsonConvert.DeserializeObject<T>(obj);
         }

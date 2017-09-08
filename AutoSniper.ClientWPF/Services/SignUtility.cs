@@ -5,11 +5,26 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Net;
 using System.IO;
+using AutoSniper.Framework.Converter;
 
 namespace AutoSniper.ClientWPF.Services
 {
-    class SignUtility
+    public static class SignUtility
     {
+        /// <summary>
+        /// 生成带参数的Url
+        /// </summary>
+        /// <param name="url">带Route的url</param>
+        /// <param name="queryString"></param>
+        /// <param name="secretkey"></param>
+        /// <returns></returns>
+        public static string MakeUrl(this string url, string queryString, string secretkey)
+        {
+            var sign = MakeSign(queryString, secretkey);
+            return url + $"?{queryString}&sign={sign}&reqTime={DateTime.UtcNow.ToTimeStamp()}";
+        }
+
+
         /// <summary>
         /// 生成签名
         /// </summary>
@@ -17,7 +32,7 @@ namespace AutoSniper.ClientWPF.Services
         /// <param name="secretkey"></param>
         /// <returns></returns>
 
-        public static string MakeSign(string queryString, string secretkey)
+        private static string MakeSign(string queryString, string secretkey)
         {
             var encryptedBytes = ((HashAlgorithm)CryptoConfig.CreateFromName("SHA")).ComputeHash(Encoding.UTF8.GetBytes(secretkey.Trim()));
             var stringBuilder = new StringBuilder();

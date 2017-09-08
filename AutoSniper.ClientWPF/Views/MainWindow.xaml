@@ -8,7 +8,7 @@
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  
         Background="{DynamicResource MaterialDesignPaper}"
-        Title="MainWindow" Height="350" Width="525" TitleCaps="False" 
+        Title="MainWindow" Height="628" Width="1024" TitleCaps="False" 
         ShowTitleBar="True" BorderBrush="{DynamicResource PrimaryHueDarkBrush}">
 
     <Grid/>

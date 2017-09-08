@@ -126,8 +126,10 @@
     </Compile>
     <Compile Include="Repositories\DataProvider.cs" />
     <Compile Include="Repositories\TradeBookRepository.cs" />
+    <Compile Include="Services\Models\Enum.cs" />
     <Compile Include="Services\Models\ErrorCode.cs" />
-    <Compile Include="Services\Models\ReponseModel.cs" />
+    <Compile Include="Services\Models\OrderModel.cs" />
+    <Compile Include="Services\Models\ResponseModel.cs" />
     <Compile Include="Services\Models\TickerModel.cs" />
     <Compile Include="Services\QuotationServices.cs" />
     <Compile Include="Services\SignUtility.cs" />
@@ -174,6 +176,11 @@
       <Project>{799750e7-a9fd-477d-987c-075fe22ec121}</Project>
       <Name>AutoSniper.Framework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AppData\Database.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.2\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.2\build\net451\System.Data.SQLite.Core.targets')" />

@@ -11,6 +11,25 @@ namespace AutoSniper.Framework.Converter
 {
     public static class DataTableConverter
     {
+        public static List<T> ToList<T>(this IDataReader reader) where T : new()
+        {
+            List<T> res = new List<T>();
+            while (reader.Read())
+            {
+                T t = new T();
+                for (int inc = 0; inc < reader.FieldCount; inc++)
+                {
+                    Type type = t.GetType();
+                    PropertyInfo prop = type.GetProperty(reader.GetName(inc));
+                    prop.SetValue(t, reader.GetValue(inc), null);
+                }
+                res.Add(t);
+            }
+            reader.Close();
+            return res;
+        }
+
+
         /// <summary> 
         /// DataTable转List
         /// </summary>

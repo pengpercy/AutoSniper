@@ -14,7 +14,7 @@ namespace AutoSniper.ClientWPF.Repositories.Models
         /// <summary>
         /// 交易Id
         /// </summary>
-        public int TradeId { get; set; }
+        public long TradeId { get; set; }
         /// <summary>
         /// 买单Id
         /// </summary>
@@ -30,7 +30,7 @@ namespace AutoSniper.ClientWPF.Repositories.Models
         /// <summary>
         /// 买单完成量
         /// </summary>
-        public decimal BuyCompletedVolume { get; set; }
+        public decimal BuyTradeVolume { get; set; }
         /// <summary>
         /// 买单交易额
         /// </summary>
@@ -50,7 +50,7 @@ namespace AutoSniper.ClientWPF.Repositories.Models
         /// <summary>
         /// 卖单完成量
         /// </summary>
-        public decimal SellCompletedVolume { get; set; }
+        public decimal SellTradeVolume { get; set; }
         /// <summary>
         /// 卖单交易额
         /// </summary>
@@ -62,15 +62,15 @@ namespace AutoSniper.ClientWPF.Repositories.Models
         /// <summary>
         /// 交易状态
         /// </summary>
-        public TradeStatus Status { get; set; }
+        public string Status { get; set; }
         /// <summary>
         /// 更新时间
         /// </summary>
-        public DateTime UpdateDate { get; set; }
+        public string UpdateDate { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime CreateDate { get; set; }
+        public string CreateDate { get; set; }
     }
 
     /// <summary>

@@ -16,49 +16,20 @@ namespace AutoSniper.ClientWPF.Repositories
         private static SQLiteConnection Connection;
         public static SQLiteConnection GetConnection()
         {
-            if (Connection != null)
-                return Connection;
+            if (Connection != null) { return Connection; }
             var dbFilePath = "./AutoSniper.db";
-            if (!File.Exists(dbFilePath))
+            var connectionString = string.Format("Data Source={0};Version=3;", dbFilePath);
+            if (File.Exists(dbFilePath))
             {
-                SQLiteConnection.CreateFile(dbFilePath);
-                #region Create table Sql string
-                string sqlCreateTable = @"
-create table Currency (
-   CurrencyId           integer  PRIMARY KEY AUTOINCREMENT,
-   Name                 nvarchar(16)         not null,
-   TakerRate            decimal              not null,
-   MakerRate            decimal              null,
-   DefaultProfit        decimal              null,
-   UpdateDate           datetime             not null ,
-   CreateDate           datetime             not null DEFAULT (datetime('now','localtime'))
-);
-
-create table TradeBook (
-   TradeId              integer  PRIMARY KEY AUTOINCREMENT,
-   BuyOrderId           nvarchar(64)               not null,
-   BuyPrice             decimal              not null,
-   BuyVolume            decimal              not null,
-   BuyCompletedVolume   decimal              not null,
-   BuyAmount            decimal              not null,
-   SellOrderId          nvarchar(64)               not null,
-   SellPrice            decimal              not null,
-   SellVolumn           decimal              not null,
-   SellCompletedVolume  decimal              not null,
-   SellAmount           decimal              not null,
-   Profit               decimal              not null,
-   Status               nvarchar(64)               not null,
-   UpdateDate           datetime             not null ,
-   CreateDate           datetime             not null DEFAULT (datetime('now','localtime'))
-)";
-                #endregion
-
-                Connection = new SQLiteConnection(string.Format("Data Source={0};Version=3;", dbFilePath));
+                Connection = new SQLiteConnection(connectionString);
                 Connection.Open();
-                Connection.Execute(sqlCreateTable);
+                return Connection;
             }
-            Connection = new SQLiteConnection(string.Format("Data Source={0};Version=3;", dbFilePath));
+
+            SQLiteConnection.CreateFile(dbFilePath);
+            Connection = new SQLiteConnection(connectionString);
             Connection.Open();
+            Connection.Execute(File.ReadAllText("../../AppData/Database.sql"));
             return Connection;
         }
     }

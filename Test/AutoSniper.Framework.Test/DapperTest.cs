@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AutoSniper.Framework.Converter;
 using AutoSniper.ClientWPF.Repositories.Models;
 using AutoSniper.ClientWPF.Repositories;
+using System.Linq;
 
 namespace AutoSniper.UnitTest
 {
@@ -16,20 +17,41 @@ namespace AutoSniper.UnitTest
             trade.BuyOrderId = "23524521335";
             trade.BuyPrice = 13;
             trade.BuyVolume = 1;
-            trade.BuyCompletedVolume = 0;
+            trade.BuyTradeVolume = 0;
             trade.BuyAmount = 0;
             trade.SellOrderId = "";
             trade.SellPrice = 3;
             trade.SellVolume = 0;
-            trade.SellCompletedVolume = 0;
+            trade.SellTradeVolume = 0;
             trade.SellAmount = 0;
             trade.Profit = 1;
-            trade.Status = TradeStatus.Buying;
-            trade.UpdateDate = DateTime.Now;
-            trade.CreateDate = DateTime.Now;
-            //var result = TradeBookRepository.CreateTradeBook(trade);
-            var result = TradeBookRepository.CreateTradeBook2(trade);
+            trade.Status = TradeStatus.Buying.ToString();
+            trade.UpdateDate = DateTime.Now.ToString();
+            trade.CreateDate = DateTime.Now.ToString();
+            var result = TradeBookRepository.BuyOrder(trade);
+            //var result = TradeBookRepository.CreateTradeBook2(trade);
             Assert.IsTrue(result == 1);
+        }
+
+        [TestMethod]
+        public void UpdateTest()
+        {
+            var result = TradeBookRepository.CancelOrder(1);
+            Assert.IsTrue(result == 1);
+        }
+
+        [TestMethod]
+        public void GetOrderTest()
+        {
+            var result = TradeBookRepository.GetActiveOrder().ToJson();
+            Assert.IsTrue(result.Any());
+        }
+
+        [TestMethod]
+        public void CurrentFunctionNameTest()
+        {
+            var name = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            Assert.IsTrue(name == "CurrentFunctionNameTest");
         }
     }
 }
