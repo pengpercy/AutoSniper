@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace AutoSniper.ClientWPF.Services.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class TickerModel
     {
         public decimal High { get; set; }
@@ -14,6 +17,6 @@ namespace AutoSniper.ClientWPF.Services.Models
         public decimal Sell { get; set; }
         public decimal Last { get; set; }
         public decimal Vol { get; set; }
-        public long Date { get; set; }
+        public DateTime Date { get; set; }
     }
 }

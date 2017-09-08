@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace AutoSniper.ClientWPF.Services
 {
+    /// <summary>
+    /// 交易操作
+    /// </summary>
     public class TradeServices
     {
         private static ILog Logger = new Log4NetLogFactory().GetLog(typeof(TradeServices).Name);
@@ -20,7 +23,7 @@ namespace AutoSniper.ClientWPF.Services
         public static string secretkey = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX";
 
         /// <summary>
-        /// 获取用户资产以及安全认证信息
+        /// 获取用户资产以及安全认证设置信息
         /// </summary>
         /// <returns></returns>
         public static string GetAccountInfo()
