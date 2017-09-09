@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSniper.Framework", "Framework\AutoSniper.Framework\AutoSniper.Framework.csproj", "{799750E7-A9FD-477D-987C-075FE22EC121}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSniper.Framework", "AutoSniper.Framework\AutoSniper.Framework.csproj", "{799750E7-A9FD-477D-987C-075FE22EC121}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSniper.UnitTest", "Test\AutoSniper.Framework.Test\AutoSniper.UnitTest.csproj", "{0D2E6CF5-30AA-4A53-86D2-ABF296C8360C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSniper.UnitTest", "AutoSniper.UnitTest\AutoSniper.UnitTest.csproj", "{0D2E6CF5-30AA-4A53-86D2-ABF296C8360C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSniper.ClientWPF", "AutoSniper.ClientWPF\AutoSniper.ClientWPF.csproj", "{25DB5821-050C-49B5-A87E-B194BA95859A}"
 EndProject

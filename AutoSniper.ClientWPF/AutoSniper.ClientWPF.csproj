@@ -172,7 +172,7 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Framework\AutoSniper.Framework\AutoSniper.Framework.csproj">
+    <ProjectReference Include="..\AutoSniper.Framework\AutoSniper.Framework.csproj">
       <Project>{799750e7-a9fd-477d-987c-075fe22ec121}</Project>
       <Name>AutoSniper.Framework</Name>
     </ProjectReference>
