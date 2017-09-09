@@ -116,28 +116,39 @@
     <Compile Include="Repositories\CurrencyRepository.cs" />
     <Compile Include="Repositories\Models\Currency.cs" />
     <Compile Include="Repositories\Models\TradeBook.cs" />
-    <Page Include="Views\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="WPFModules\ViewModels\SelectableViewModel.cs" />
+    <Compile Include="WPFModules\ViewModels\ViewModelBase.cs" />
+    <Compile Include="WPFModules\Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPFModules\Views\TradeBooksControl.xaml.cs">
+      <DependentUpon>TradeBooksControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repositories\DataProvider.cs" />
+    <Compile Include="Repositories\BaseProvider\DataProvider.cs" />
     <Compile Include="Repositories\TradeBookRepository.cs" />
+    <Compile Include="Services\Models\DepthModel.cs" />
     <Compile Include="Services\Models\Enum.cs" />
     <Compile Include="Services\Models\ErrorCode.cs" />
+    <Compile Include="Services\Models\KlineModel.cs" />
     <Compile Include="Services\Models\OrderModel.cs" />
     <Compile Include="Services\Models\ResponseModel.cs" />
     <Compile Include="Services\Models\TickerModel.cs" />
+    <Compile Include="Services\Models\TradesModel.cs" />
     <Compile Include="Services\QuotationServices.cs" />
     <Compile Include="Services\SignUtility.cs" />
     <Compile Include="Services\TradeServices.cs" />
-    <Compile Include="Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="WPFModules\Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPFModules\Views\TradeBooksControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -167,10 +178,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\AutoSniper.Framework\AutoSniper.Framework.csproj">
       <Project>{799750e7-a9fd-477d-987c-075fe22ec121}</Project>

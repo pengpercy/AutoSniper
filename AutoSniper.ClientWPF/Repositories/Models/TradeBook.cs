@@ -14,7 +14,7 @@ namespace AutoSniper.ClientWPF.Repositories.Models
         /// <summary>
         /// 交易Id
         /// </summary>
-        public long TradeId { get; set; }
+        public long? TradeId { get; set; }
         /// <summary>
         /// 买单Id
         /// </summary>

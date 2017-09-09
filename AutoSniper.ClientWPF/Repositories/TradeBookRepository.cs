@@ -1,4 +1,5 @@
-﻿using AutoSniper.ClientWPF.Repositories.Models;
+﻿using AutoSniper.ClientWPF.Repositories.BaseProvider;
+using AutoSniper.ClientWPF.Repositories.Models;
 using AutoSniper.Framework.Converter;
 using Dapper;
 using DapperExtensions;

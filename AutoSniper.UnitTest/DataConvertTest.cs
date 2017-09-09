@@ -53,5 +53,48 @@ namespace AutoSniper.UnitTest
             var list = JArray.Parse(json).ToObject<List<OrderModel>>();
             Assert.IsTrue(list.Any());
         }
+
+        [TestMethod]
+        public void ConvertTest()
+        {
+            var json = @"
+{
+    'data': [
+        [
+            1472107500000,
+            3840.46,
+            3843.56,
+            3839.58,
+            3843.3,
+            492.456
+        ]
+    ],
+    'moneyType': 'cny',
+    'symbol': 'btc'
+}
+";
+            var data = json.FromJSON<KlineModel>();
+            Assert.IsTrue(data.Data.Any());
+
+            json = @"
+{
+    'asks': [
+        [
+            83.28,
+            11.8
+        ]
+    ],
+    'bids': [
+        [
+            81.91,
+            3.65
+        ]
+    ],
+    'timestamp' : 1472107500000
+    }
+";
+            var data1 = json.FromJSON<DepthModel>();
+            Assert.IsTrue(data1.Asks.Any() && data1.Bids.Any());
+        }
     }
 }

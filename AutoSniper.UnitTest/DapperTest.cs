@@ -53,5 +53,12 @@ namespace AutoSniper.UnitTest
             var name = System.Reflection.MethodBase.GetCurrentMethod().Name;
             Assert.IsTrue(name == "CurrentFunctionNameTest");
         }
+
+        [TestMethod]
+        public void GetAllCurrencyTest()
+        {
+            var data = CurrencyRepository.GetAllCurrency();
+            Assert.IsTrue(data.Any());
+        }
     }
 }

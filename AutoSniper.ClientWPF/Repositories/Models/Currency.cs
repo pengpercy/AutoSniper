@@ -34,10 +34,10 @@ namespace AutoSniper.ClientWPF.Repositories.Models
         /// <summary>
         /// 更新时间
         /// </summary>
-        public DateTime UpdateDate { get; set; }
+        public string UpdateDate { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime CreateDate { get; set; }
+        public string CreateDate { get; set; }
     }
 }

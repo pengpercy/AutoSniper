@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AutoSniper.ClientWPF
+namespace AutoSniper.ClientWPF.WPFModules.Views
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// TradeBooksControl.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow
+    public partial class TradeBooksControl : UserControl
     {
-        public MainWindow()
+        public TradeBooksControl()
         {
             InitializeComponent();
         }

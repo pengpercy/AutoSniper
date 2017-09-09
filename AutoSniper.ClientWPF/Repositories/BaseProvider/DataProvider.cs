@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoSniper.ClientWPF.Repositories
+namespace AutoSniper.ClientWPF.Repositories.BaseProvider
 {
     public class DataProvider
     {
@@ -26,6 +26,7 @@ namespace AutoSniper.ClientWPF.Repositories
                 return Connection;
             }
 
+            //首次启动，创建数据库和表格，返回链接对象
             SQLiteConnection.CreateFile(dbFilePath);
             Connection = new SQLiteConnection(connectionString);
             Connection.Open();
