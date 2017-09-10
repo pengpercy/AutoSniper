@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace AutoSniper.ClientWPF.WPFModules.ViewModels
 {
-    public class SelectableViewModel : ViewModelBase
+    public class SelectableViewModel : BaseViewModel
     {
         private bool _isSelected;
         private string _name;
@@ -78,9 +78,9 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public new event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual new void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));

@@ -37,6 +37,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CacheManager.Core, Version=1.1.1.0, Culture=neutral, PublicKeyToken=5b450b4fb65c4cdb, processorArchitecture=MSIL">
+      <HintPath>..\packages\CacheManager.Core.1.1.1\lib\net45\CacheManager.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
       <Private>True</Private>
@@ -91,6 +95,7 @@
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.105.2\lib\net451\System.Data.SQLite.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -116,8 +121,18 @@
     <Compile Include="Repositories\CurrencyRepository.cs" />
     <Compile Include="Repositories\Models\Currency.cs" />
     <Compile Include="Repositories\Models\TradeBook.cs" />
+    <Compile Include="Services\Models\AccountModel.cs" />
+    <Compile Include="WPFModules\Commands\RelayCommand.cs" />
+    <Compile Include="WPFModules\Commands\RelayCommandAsync.cs" />
+    <Compile Include="WPFModules\Models\AssetModel.cs" />
+    <Compile Include="WPFModules\Services\AccountServices.cs" />
+    <Compile Include="WPFModules\Utility\ViewModelLocator.cs" />
+    <Compile Include="WPFModules\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="WPFModules\ViewModels\SelectableViewModel.cs" />
-    <Compile Include="WPFModules\ViewModels\ViewModelBase.cs" />
+    <Compile Include="WPFModules\ViewModels\BaseViewModel.cs" />
+    <Compile Include="WPFModules\Views\GridsControl.xaml.cs">
+      <DependentUpon>GridsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPFModules\Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -141,6 +156,10 @@
     <Compile Include="Services\QuotationServices.cs" />
     <Compile Include="Services\SignUtility.cs" />
     <Compile Include="Services\TradeServices.cs" />
+    <Page Include="WPFModules\Views\GridsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WPFModules\Views\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

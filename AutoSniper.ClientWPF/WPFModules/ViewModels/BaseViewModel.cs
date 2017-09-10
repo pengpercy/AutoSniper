@@ -1,10 +1,16 @@
-﻿using System.ComponentModel;
+﻿using AutoSniper.Framework.Logger;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace AutoSniper.ClientWPF.WPFModules.ViewModels
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged
     {
+        protected ILog Logger;
+        public BaseViewModel()
+        {
+            Logger = new Log4NetLogFactory().GetLog(GetType().Name);
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName()] string name = null)

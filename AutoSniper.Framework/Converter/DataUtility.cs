@@ -91,5 +91,15 @@ namespace AutoSniper.Framework.Converter
             return result;
         }
         #endregion
+
+        /// <summary>
+        /// 枚举转List
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static List<string> ToList<T>()
+        {
+            return Enum.GetValues(typeof(T)).Cast<T>().Select(m => Enum.GetName(typeof(T), m)).ToList();
+        }
     }
 }

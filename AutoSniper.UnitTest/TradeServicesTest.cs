@@ -5,6 +5,11 @@ using AutoSniper.ClientWPF.Repositories.Models;
 using AutoSniper.ClientWPF.Repositories;
 using System.Linq;
 using AutoSniper.ClientWPF.Services;
+using Newtonsoft.Json.Linq;
+using AutoSniper.ClientWPF.Services.Models;
+using CurrencyEnum = AutoSniper.ClientWPF.Services.Models.Currency;
+using System.Collections.Generic;
+using System.Web;
 
 namespace AutoSniper.UnitTest
 {
@@ -12,10 +17,10 @@ namespace AutoSniper.UnitTest
     public class TradeServicesTest
     {
         [TestMethod]
-        public void GetAccountInfoTest()
+        public void AccountInfoTest()
         {
-            var json = TradeServices.GetAccountInfo();
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(json));
+            var data = TradeServices.GetAccountInfo();
+            Assert.IsTrue(data.AuthGoogleEnabled);
         }
     }
 }

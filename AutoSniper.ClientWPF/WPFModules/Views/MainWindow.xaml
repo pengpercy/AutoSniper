@@ -4,19 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoSniper.ClientWPF.WPFModules.Views"
+        xmlns:vmodels="clr-namespace:AutoSniper.ClientWPF.WPFModules.ViewModels"
         mc:Ignorable="d"
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  
         Background="{DynamicResource MaterialDesignPaper}"
+        DataContext="{Binding Source={StaticResource VMLocator}, Path=MainVM}"
+        d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type vmodels:MainWindowViewModel}}"
+        WindowStartupLocation="CenterScreen"
         Title="交易窗口" 
         MinHeight="680"
         Height="680"
         MinWidth="1024" 
         Width="1024"
-        TitleCaps="False" 
-        WindowStartupLocation="CenterScreen"
-        ShowTitleBar="True"         
-        BorderBrush="{DynamicResource PrimaryHueDarkBrush}">
+        TitleCaps="False"
+        ShowTitleBar="True">
     <Grid Background="#2c3940">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -45,7 +47,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0"
-                  Name="Left"
+                  Name="left"
                   Margin="0,5,0,5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -69,7 +71,12 @@
                                  Background="#303e46"
                                  Padding="5,0,0,1"
                                  materialDesign:HintAssist.Hint="委托价格" >
-
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="2"/>
+                                    <Setter Property="BorderBrush" Value="#c1d0dc"/>
+                                </Style>
+                            </TextBox.Resources>
                         </TextBox>
 
                         <TextBox x:Name="Volume" 
@@ -79,6 +86,12 @@
                                  Background="#303e46"
                                  Padding="5,0,0,1"
                                  materialDesign:HintAssist.Hint="委托数量" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="2"/>
+                                    <Setter Property="BorderBrush" Value="#c1d0dc"/>
+                                </Style>
+                            </TextBox.Resources>
                         </TextBox>
 
                         <TextBox x:Name="TradeAmount" 
@@ -88,6 +101,12 @@
                                  Background="#303e46"
                                  Padding="5,0,0,1"
                                  materialDesign:HintAssist.Hint="交易额" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="2"/>
+                                    <Setter Property="BorderBrush" Value="#c1d0dc"/>
+                                </Style>
+                            </TextBox.Resources>
                         </TextBox>
 
                         <TextBlock Text="交易额以实际成交额为准"
@@ -101,8 +120,8 @@
                                 Height="35"
                                 Content="现货买入"
                                 BorderBrush="#1b262d"
-                                Foreground="#a4a9ac"
-                                Background="{DynamicResource PrimaryHueDarkBrush}"/>
+                                Foreground="#dadfd3"
+                                Background="#526c2e"/>
                     </StackPanel>
                 </materialDesign:Card>
 
@@ -127,7 +146,7 @@
                                        Padding="20,2,5,2"
                                        FontSize="13"
                                        Width="100"/>
-                                <TextBlock Text="0000.00"
+                                <TextBlock Text="{Binding AssetInfo.AvailableCNY , Mode=TwoWay}"
                                        TextAlignment="Right"
                                        Foreground="#7b1a1f"
                                        Padding="5,2,20,2"
@@ -143,7 +162,7 @@
                                 Margin="0,0,0,10">
                             <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Center">
-                                <TextBlock Text="可买XXX"
+                                <TextBlock Text="可买BCC"
                                        TextAlignment="Left"
                                        Foreground="#7b1a1f"
                                        Padding="20,2,5,2"
@@ -154,7 +173,7 @@
                                        Foreground="#7b1a1f"
                                        Padding="5,2,20,2"
                                        FontSize="13"
-                                       Text="00.00"
+                                       Text="{Binding AssetInfo.AvailableBuy , Mode=TwoWay}"
                                        Width="160"/>
                             </StackPanel>
                         </Border>
@@ -177,7 +196,7 @@
                                        Foreground="#999"
                                        Padding="5,2,20,2"
                                        FontSize="13"
-                                       Text="00.00"
+                                       Text="{Binding AssetInfo.TotalAssets , Mode=TwoWay}"
                                        Width="160"/>
                             </StackPanel>
                         </Border>
@@ -199,7 +218,7 @@
                                        Foreground="#999"
                                        Padding="5,2,20,2"
                                        FontSize="13"
-                                       Text="00.00"
+                                       Text="{Binding AssetInfo.NetAssets , Mode=TwoWay}"
                                        Width="160"/>
                             </StackPanel>
                         </Border>
@@ -210,7 +229,7 @@
                                 BorderThickness="0,0,0,1" Margin="0,0,0,10">
                             <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Center">
-                                <TextBlock Text="可用XXX"
+                                <TextBlock Text="可用BCC"
                                        TextAlignment="Left"
                                        Foreground="#666c70"
                                        Padding="20,2,5,2"
@@ -221,7 +240,7 @@
                                        Foreground="#999"
                                        Padding="5,2,20,2"
                                        FontSize="13"
-                                       Text="00.00"
+                                       Text="{Binding AssetInfo.AvailableVol , Mode=TwoWay}"
                                        Width="160"/>
                             </StackPanel>
                         </Border>
@@ -243,7 +262,7 @@
                                        Foreground="#999"
                                        Padding="5,2,20,2"
                                        FontSize="13"
-                                       Text="00.00"
+                                       Text="{Binding AssetInfo.FrozenCNY , Mode=TwoWay}"
                                        Width="160"/>
                             </StackPanel>
                         </Border>

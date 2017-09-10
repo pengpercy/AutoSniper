@@ -2,6 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:AutoSniper.ClientWPF"
+             xmlns:commands="clr-namespace:AutoSniper.ClientWPF.WPFModules.Commands"
+             xmlns:utiliy="clr-namespace:AutoSniper.ClientWPF.WPFModules.Utility"
+             xmlns:vmodels="clr-namespace:AutoSniper.ClientWPF.WPFModules.ViewModels"
+             xmlns:views="clr-namespace:AutoSniper.ClientWPF.WPFModules.Views"
              StartupUri="WPFModules/Views/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -15,7 +19,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.BlueGrey.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Green.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightGreen.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -37,53 +41,10 @@
             <SolidColorBrush x:Key="IdealForegroundColorBrush" Color="{DynamicResource Primary700Foreground}"/>
             <SolidColorBrush x:Key="IdealForegroundDisabledBrush" Color="{DynamicResource Primary700}" Opacity="0.3"/>
 
-          
-            <!--<Style x:Key="BuyPrice" TargetType="{x:Type TextBox}">
-                <Setter Property="FontFamily" Value="Microsoft YaHei" />
-                <Setter Property="Height" Value="28" />
-                <Setter Property="Width" Value="480" />
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="Foreground" Value="#000000" />
-                <Setter Property="HorizontalAlignment" Value="Left" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-            </Style>-->
-
-            <!--<Style TargetType="{x:Type TextBox}">
-                <Setter Property="Background" Value="#fff"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignDivider}"/>
-                <Setter Property="Foreground" Value="#3a3a3a"/>
-                <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                <Setter Property="Padding" Value="5"/>
-                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                <Setter Property="AllowDrop" Value="true"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type TextBox}">
-                            <Border x:Name="BackBorder" CornerRadius="4" SnapsToDevicePixels="true" BorderThickness="{TemplateBinding BorderThickness}" Background="#fff3c3" BorderBrush="{DynamicResource MaterialDesignDivider}">
-                                <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsEnabled" Value="false">
-                                    <Setter Property="Background" TargetName="BackBorder" Value="{x:Null}"/>
-                                    <Setter Property="Foreground" Value="#CCFFFFFF"/>
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" TargetName="BackBorder" Value="#30FFFFFF"/>
-                                    <Setter Property="BorderBrush" TargetName="BackBorder" Value="#30FFFFFF"/>
-                                </Trigger>
-                                <Trigger Property="IsFocused" Value="True">
-                                    <Setter Property="Background" TargetName="BackBorder" Value="#30000000"/>
-                                    <Setter Property="BorderBrush" TargetName="BackBorder" Value="#50FFFFFF"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>-->
 
 
+
+            <utiliy:ViewModelLocator x:Key="VMLocator"/>
 
         </ResourceDictionary>
     </Application.Resources>

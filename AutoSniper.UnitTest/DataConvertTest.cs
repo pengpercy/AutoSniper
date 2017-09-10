@@ -5,6 +5,8 @@ using AutoSniper.ClientWPF.Services.Models;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+using ServiceStack.Text;
 
 namespace AutoSniper.UnitTest
 {
@@ -96,5 +98,33 @@ namespace AutoSniper.UnitTest
             var data1 = json.FromJSON<DepthModel>();
             Assert.IsTrue(data1.Asks.Any() && data1.Bids.Any());
         }
+
+        [TestMethod]
+        public void JsonsConvertTest()
+        {
+            var url = $"";
+            var json = url.GetJsonFromUrl();
+            var obj = JObject.Parse(json)["result"];
+            var data = obj["base"].ToObject<AccountModel>();
+            data.TotalAssets = obj["totalAssets"].Value<decimal>();
+            data.NetAssets = obj["netAssets"].Value<decimal>();
+            data.AssetsList = new Dictionary<string, Assets>();
+            Enum.GetValues(typeof(Currency)).Cast<Currency>().ToList().ForEach(m =>
+            {
+                var i = Enum.GetName(typeof(Currency), m).Replace("_cny", "").ToUpper();
+                var asset = obj["balance"][i].ToObject<Assets>();
+                asset.Symbol = HttpUtility.UrlDecode(asset.Symbol);
+                asset.FrozenAmount = obj["frozen"][i]["amount"].Value<decimal>();
+                //排除HSR
+                if (!new[] { "HSR", "QTUM" }.Contains(i))
+                {
+                    asset.P2pInVol = obj["p2p"][$"in{i}"].Value<decimal>();
+                    asset.P2pOutVol = obj["p2p"][$"out{i}"].Value<decimal>();
+                }
+                data.AssetsList.Add(i, asset);
+            });
+            Assert.IsTrue(data.AuthGoogleEnabled);
+        }
+
     }
 }

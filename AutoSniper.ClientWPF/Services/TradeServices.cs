@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace AutoSniper.ClientWPF.Services
 {
@@ -22,26 +23,48 @@ namespace AutoSniper.ClientWPF.Services
         public static string accesskey = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX";
         public static string secretkey = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX";
 
+
         /// <summary>
         /// 获取用户资产以及安全认证设置信息
         /// </summary>
         /// <returns></returns>
-        public static string GetAccountInfo()
+        public static AccountModel GetAccountInfo()
         {
             var json = string.Empty;
             var method = "getAccountInfo";
-            var url = BaseUrl + method;
+            string url = BaseUrl + method;
+            var data = new AccountModel();
             try
             {
                 var queryString = new { method, accesskey }.ToQueryString();
-                json = url.MakeUrl(queryString, secretkey).GetJsonFromUrl();
-                return json;
+                url = url.MakeUrl(queryString, secretkey);
+                json = url.GetJsonFromUrl();
+                var obj = JObject.Parse(json)["result"];
+                data = obj["base"].ToObject<AccountModel>();
+                data.TotalAssets = obj["totalAssets"].Value<decimal>();
+                data.NetAssets = obj["netAssets"].Value<decimal>();
+                data.AssetsList = new Dictionary<string, Assets>();
+                Enum.GetValues(typeof(Currency)).Cast<Currency>().ToList().ForEach(m =>
+                {
+                    var i = Enum.GetName(typeof(Currency), m).Replace("_cny", "").ToUpper();
+                    var asset = obj["balance"][i].ToObject<Assets>();
+                    asset.Symbol = HttpUtility.UrlDecode(asset.Symbol);
+                    asset.FrozenAmount = obj["frozen"][i]["amount"].Value<decimal>();
+                    //排除HSR
+                    if (!new[] { "HSR", "QTUM" }.Contains(i))
+                    {
+                        asset.P2pInVol = obj["p2p"][$"in{i}"].Value<decimal>();
+                        asset.P2pOutVol = obj["p2p"][$"out{i}"].Value<decimal>();
+                    }
+                    data.AssetsList.Add(i, asset);
+                });
+                return data;
             }
             catch (Exception ex)
             {
                 Logger.ErrorFormat($"Response:{json},Parameters:{url},Ex:{ex}");
             }
-            return "";
+            return data;
         }
 
         /// <summary>
