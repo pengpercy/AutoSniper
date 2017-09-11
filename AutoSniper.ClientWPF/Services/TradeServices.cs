@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using ServiceStack.Text;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -20,8 +21,20 @@ namespace AutoSniper.ClientWPF.Services
     {
         private static ILog Logger = new Log4NetLogFactory().GetLog(typeof(TradeServices).Name);
         public static string BaseUrl = "https://trade.chbtc.com/api/";
-        public static string accesskey = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX";
-        public static string secretkey = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX";
+
+        private static ApiKeyModel ApiKey;
+
+        public static ApiKeyModel GetApiKey()
+        {
+            if (ApiKey != null) { return ApiKey; }
+            var configPath = "../../AppData/AppConfig.json";
+            ApiKey = File.Exists(configPath) ?
+                JObject.Parse(File.ReadAllText(configPath))["apikey"].ToObject<ApiKeyModel>()
+                : null;
+            return ApiKey;
+        }
+
+
 
 
         /// <summary>
@@ -36,8 +49,8 @@ namespace AutoSniper.ClientWPF.Services
             var data = new AccountModel();
             try
             {
-                var queryString = new { method, accesskey }.ToQueryString();
-                url = url.MakeUrl(queryString, secretkey);
+                var queryString = new { method, GetApiKey().accesskey }.ToQueryString();
+                url = url.MakeUrl(queryString, GetApiKey().secretkey);
                 json = url.GetJsonFromUrl();
                 var obj = JObject.Parse(json)["result"];
                 data = obj["base"].ToObject<AccountModel>();
@@ -82,8 +95,8 @@ namespace AutoSniper.ClientWPF.Services
             var url = BaseUrl + method;
             try
             {
-                var queryString = new { method, accesskey, price, amount, tradeType = (int)tradeType, currency }.ToQueryString();
-                json = url.MakeUrl(queryString, secretkey).GetJsonFromUrl();
+                var queryString = new { method, GetApiKey().accesskey, price, amount, tradeType = (int)tradeType, currency }.ToQueryString();
+                json = url.MakeUrl(queryString, GetApiKey().secretkey).GetJsonFromUrl();
                 return json.FromJSON<ResponseModel>();
             }
             catch (Exception ex)
@@ -106,8 +119,8 @@ namespace AutoSniper.ClientWPF.Services
             var url = BaseUrl + method;
             try
             {
-                var queryString = new { method, accesskey, id = orderId, currency }.ToQueryString();
-                json = url.MakeUrl(queryString, secretkey).GetJsonFromUrl();
+                var queryString = new { method, GetApiKey().accesskey, id = orderId, currency }.ToQueryString();
+                json = url.MakeUrl(queryString, GetApiKey().secretkey).GetJsonFromUrl();
                 return json.FromJSON<ResponseModel>();
             }
             catch (Exception ex)
@@ -130,8 +143,8 @@ namespace AutoSniper.ClientWPF.Services
             var url = BaseUrl + method;
             try
             {
-                var queryString = new { method, accesskey, id = orderId, currency }.ToQueryString();
-                json = url.MakeUrl(queryString, secretkey).GetJsonFromUrl();
+                var queryString = new { method, GetApiKey().accesskey, id = orderId, currency }.ToQueryString();
+                json = url.MakeUrl(queryString, GetApiKey().secretkey).GetJsonFromUrl();
                 return json.FromJSON<OrderModel>();
             }
             catch (Exception ex)
@@ -155,8 +168,8 @@ namespace AutoSniper.ClientWPF.Services
             var url = BaseUrl + method;
             try
             {
-                var queryString = new { method, accesskey, tradeType = (int)tradeType, currency, pageIndex }.ToQueryString();
-                json = url.MakeUrl(queryString, secretkey).GetJsonFromUrl();
+                var queryString = new { method, GetApiKey().accesskey, tradeType = (int)tradeType, currency, pageIndex }.ToQueryString();
+                json = url.MakeUrl(queryString, GetApiKey().secretkey).GetJsonFromUrl();
                 return JArray.Parse(json).ToObject<List<OrderModel>>();
             }
             catch (Exception ex)
@@ -181,8 +194,8 @@ namespace AutoSniper.ClientWPF.Services
             var url = BaseUrl + method;
             try
             {
-                var queryString = new { method, accesskey, tradeType = (int)tradeType, currency, pageIndex, pageSize }.ToQueryString();
-                json = url.MakeUrl(queryString, secretkey).GetJsonFromUrl();
+                var queryString = new { method, GetApiKey().accesskey, tradeType = (int)tradeType, currency, pageIndex, pageSize }.ToQueryString();
+                json = url.MakeUrl(queryString, GetApiKey().secretkey).GetJsonFromUrl();
                 return JArray.Parse(json).ToObject<List<OrderModel>>();
             }
             catch (Exception ex)
@@ -206,8 +219,8 @@ namespace AutoSniper.ClientWPF.Services
             var url = BaseUrl + method;
             try
             {
-                var queryString = new { method, accesskey, currency, pageIndex, pageSize }.ToQueryString();
-                json = url.MakeUrl(queryString, secretkey).GetJsonFromUrl();
+                var queryString = new { method, GetApiKey().accesskey, currency, pageIndex, pageSize }.ToQueryString();
+                json = url.MakeUrl(queryString, GetApiKey().secretkey).GetJsonFromUrl();
                 return JArray.Parse(json).ToObject<List<OrderModel>>();
             }
             catch (Exception ex)
@@ -231,8 +244,8 @@ namespace AutoSniper.ClientWPF.Services
             var url = BaseUrl + method;
             try
             {
-                var queryString = new { method, accesskey, currency, pageIndex, pageSize }.ToQueryString();
-                json = url.MakeUrl(queryString, secretkey).GetJsonFromUrl();
+                var queryString = new { method, GetApiKey().accesskey, currency, pageIndex, pageSize }.ToQueryString();
+                json = url.MakeUrl(queryString, GetApiKey().secretkey).GetJsonFromUrl();
                 return JArray.Parse(json).ToObject<List<OrderModel>>();
             }
             catch (Exception ex)

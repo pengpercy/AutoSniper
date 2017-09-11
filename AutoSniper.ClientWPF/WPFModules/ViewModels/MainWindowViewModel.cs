@@ -18,7 +18,7 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
     {
         public MainWindowViewModel()
         {
-            AssetInfo = AccountServices.GetAssetInfo(Currency.bcc_cny);
+            AssetInfo = AccountServices.GetAssetInfo(Currency.bcc_cny) ?? new AssetModel();
         }
 
         private bool _isConnected;

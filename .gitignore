@@ -8,3 +8,4 @@
 */*/bin/Debug
 */*/obj/Debug
 *.suo
+*/AppData/AppConfig.json
