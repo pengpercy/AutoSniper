@@ -20,58 +20,73 @@
             <DataTemplate x:Key="listBoxTemplate">
                 <Grid Width="Auto">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="35"/>
-                        <RowDefinition Height="35" />
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="800"/>
-                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="80"/>
                     </Grid.ColumnDefinitions>
+                    <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="6" BorderBrush="#666c70" BorderThickness="1,1,1,1"/>
+                    <Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="6" BorderBrush="#666c70" BorderThickness="0,1,0,0"/>
+                    <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="1" BorderBrush="#666c70" BorderThickness="1,0,0,0"/>
+                    
 
-                    <WrapPanel Grid.Column="0">
-                        <StackPanel Orientation="Horizontal">
-                            <!--委托时间-->
-                            <TextBlock Grid.Row="0" 
+
+                    <!--委托时间-->
+                    <TextBlock Grid.Row="0" 
                                Grid.Column="0" 
                                Text="{Binding CreateDate,StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}"/>
 
-                            <!--委托数量/已成交(BCC)-->
-                            <TextBlock Grid.Row="0" 
+                    <!--委托数量/已成交(BCC)-->
+                    <TextBlock Grid.Row="0" 
                                Grid.Column="1" 
                                Text="{Binding BuyVolume}"/>
 
-                            <!--成交总额(CNY)-->
-                            <TextBlock Grid.Row="0" 
+                    <!--委托价格/成交均价(CNY)-->
+                    <TextBlock Grid.Row="0" 
                                Grid.Column="2"
                                Text="{Binding BuyPrice}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Grid.Row="1" 
+                    
+                    <!--成交总额(CNY)-->
+                    <TextBlock Grid.Row="0" 
+                               Grid.Column="3"
+                               Text="{Binding BuyTradeAmount}"/>
+                    
+                    <TextBlock Grid.Row="1" 
                                Grid.Column="0" 
                                Text="{Binding UpdateDate,StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}"/>
 
-                            <TextBlock Grid.Row="1" 
+                    <TextBlock Grid.Row="1" 
                                Grid.Column="1" 
                                Text="{Binding SellVolume}"/>
 
-                            <TextBlock Grid.Row="1" 
+                    <TextBlock Grid.Row="1" 
                                Grid.Column="2"
                                 Text="{Binding SellPrice}"/>
-                        </StackPanel>
-                    </WrapPanel>
-                    <StackPanel Orientation="Vertical">
-                        <!--状态-->
-                        <TextBlock Grid.RowSpan="2"
+
+                    <TextBlock Grid.Row="1" 
                                Grid.Column="3"
+                               Text="{Binding SellTradeAmount}"/>
+                    
+                    
+                    <!--状态-->
+                    <TextBlock Grid.Row="0" 
+                               Grid.RowSpan="1"
+                               Grid.Column="4"
                                Grid.ColumnSpan="2"
                                Text="{Binding Status}"/>
 
-                        <!--操作-->
-                        <TextBlock Grid.RowSpan="2"
-                               Grid.Column="4" 
+                    <!--操作-->
+                    <TextBlock Grid.Row="0"
+                               Grid.RowSpan="1"
+                               Grid.Column="5" 
                                Grid.ColumnSpan="2"
                                Text="{Binding TradeId}"/>
-                    </StackPanel>
                 </Grid>
             </DataTemplate>
         </ResourceDictionary>
@@ -96,12 +111,12 @@
                     </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView >
-                            <GridViewColumn Width="Auto"  Header="委托时间" />
-                            <GridViewColumn Width="Auto"  Header="委托数量/已成交(BCC)" />
-                            <GridViewColumn Width="Auto"  Header="委托价格/成交均价(CNY)" />
-                            <GridViewColumn Width="Auto"  Header="成交总额(CNY)" />
-                            <GridViewColumn Width="Auto"  Header="状态" />
-                            <GridViewColumn Width="Auto"  Header="操作" />
+                            <GridViewColumn Width="140"  Header="委托时间" />
+                            <GridViewColumn Width="140"  Header="委托数量/已成交(BCC)" />
+                            <GridViewColumn Width="140"  Header="委托价格/成交均价(CNY)" />
+                            <GridViewColumn Width="80"  Header="成交总额(CNY)" />
+                            <GridViewColumn Width="80"  Header="状态" />
+                            <GridViewColumn Width="80"  Header="操作" />
                         </GridView>
 
                     </ListView.View>
