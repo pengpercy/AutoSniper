@@ -15,8 +15,8 @@
         Title="交易窗口" 
         MinHeight="680"
         Height="680"
-        MinWidth="1024" 
-        Width="1024"
+        MinWidth="1080" 
+        Width="1080"
         TitleCaps="False"
         ShowTitleBar="True">
     <Grid Background="#2c3940">
@@ -162,7 +162,7 @@
                                 Margin="0,0,0,10">
                             <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Center">
-                                <TextBlock Text="可买BCC"
+                                <TextBlock Text="{Binding AssetInfo.AvailableBuyLabel , Mode=TwoWay}"
                                        TextAlignment="Left"
                                        Foreground="#7b1a1f"
                                        Padding="20,2,5,2"
@@ -229,7 +229,7 @@
                                 BorderThickness="0,0,0,1" Margin="0,0,0,10">
                             <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Center">
-                                <TextBlock Text="可用BCC"
+                                <TextBlock Text="{Binding AssetInfo.AvailableVolLabel , Mode=TwoWay}"
                                        TextAlignment="Left"
                                        Foreground="#666c70"
                                        Padding="20,2,5,2"
@@ -276,8 +276,8 @@
                 <materialDesign:Card Margin="2,5,10,0"
                                      Background="#1b262d"
                                      Height="Auto">
-                    <local:TradeBooksControl Height="510"
-                                             Padding="10"></local:TradeBooksControl>
+                    <local:TradeBookControl Height="510"
+                                             Padding="10"></local:TradeBookControl>
                 </materialDesign:Card>
             </Grid>
         </Grid>

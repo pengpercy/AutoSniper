@@ -37,6 +37,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="CacheManager.Core, Version=1.1.1.0, Culture=neutral, PublicKeyToken=5b450b4fb65c4cdb, processorArchitecture=MSIL">
       <HintPath>..\packages\CacheManager.Core.1.1.1\lib\net45\CacheManager.Core.dll</HintPath>
       <Private>True</Private>
@@ -126,7 +130,9 @@
     <Compile Include="WPFModules\Commands\RelayCommand.cs" />
     <Compile Include="WPFModules\Commands\RelayCommandAsync.cs" />
     <Compile Include="WPFModules\Models\AssetModel.cs" />
+    <Compile Include="WPFModules\Models\TradeBookModel.cs" />
     <Compile Include="WPFModules\Services\AccountServices.cs" />
+    <Compile Include="WPFModules\Services\TradeOrderServices.cs" />
     <Compile Include="WPFModules\Utility\ViewModelLocator.cs" />
     <Compile Include="WPFModules\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="WPFModules\ViewModels\SelectableViewModel.cs" />
@@ -136,6 +142,9 @@
     </Compile>
     <Compile Include="WPFModules\Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPFModules\Views\TradeBookControl.xaml.cs">
+      <DependentUpon>TradeBookControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPFModules\Views\TradeBooksControl.xaml.cs">
       <DependentUpon>TradeBooksControl.xaml</DependentUpon>
@@ -162,6 +171,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPFModules\Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPFModules\Views\TradeBookControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -28,6 +28,10 @@ namespace AutoSniper.ClientWPF.Repositories.Models
         /// </summary>
         public decimal BuyVolume { get; set; }
         /// <summary>
+        /// 买单成交均价
+        /// </summary>
+        public decimal BuyTradePrice { get; set; }
+        /// <summary>
         /// 买单完成量
         /// </summary>
         public decimal BuyTradeVolume { get; set; }
@@ -47,6 +51,10 @@ namespace AutoSniper.ClientWPF.Repositories.Models
         /// 卖单委托量
         /// </summary>
         public decimal SellVolume { get; set; }
+        /// <summary>
+        /// 卖单成交均价
+        /// </summary>
+        public decimal SellTradePrice { get; set; }
         /// <summary>
         /// 卖单完成量
         /// </summary>
@@ -81,26 +89,26 @@ namespace AutoSniper.ClientWPF.Repositories.Models
         /// <summary>
         /// 买单中
         /// </summary>
-        Buying = 0,
+        买单中 = 0,
         /// <summary>
-        /// 部分完成卖单
+        /// 部分买单
         /// </summary>
-        PartiallyBuy = 1,
+        部分买单 = 1,
         /// <summary>
         /// 卖单中
         /// </summary>
-        Selling = 2,
+        卖单中 = 2,
         /// <summary>
-        /// 部分完成买单
+        /// 部分卖单
         /// </summary>
-        PartiallySell = 3,
+        部分卖单 = 3,
         /// <summary>
-        /// 全部卖完
+        /// 已完成
         /// </summary>
-        AllCompleted = 4,
+        已完成 = 4,
         /// <summary>
         /// 已取消
         /// </summary>
-        Cancelled = 5
+        已取消 = 5
     }
 }

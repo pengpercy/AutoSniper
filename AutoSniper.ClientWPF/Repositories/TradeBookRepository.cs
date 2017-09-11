@@ -23,7 +23,7 @@ namespace AutoSniper.ClientWPF.Repositories
         public static IEnumerable<TradeBook> GetActiveOrder(string sortColumn = "", string sortType = "")
         {
             var sort = string.IsNullOrWhiteSpace(sortColumn) ? "UpdateDate DESC" : $" {sortColumn} {sortType}";
-            var sql = $@"SELECT TradeId,BuyOrderId,BuyPrice,BuyVolume,BuyTradeVolume,BuyAmount,SellOrderId,SellPrice,SellVolume,SellTradeVolume,SellAmount,Profit,Status,UpdateDate,CreateDate FROM TradeBook WHERE Status !='{TradeStatus.Cancelled}' ORDER BY {sort}";
+            var sql = $@"SELECT TradeId,BuyOrderId,BuyPrice,BuyVolume,BuyTradeVolume,BuyTradePrice,BuyAmount,SellOrderId,SellPrice,SellVolume,SellTradeVolume,SellTradePrice,SellAmount,Profit,Status,UpdateDate,CreateDate FROM TradeBook WHERE Status NOT IN ('{TradeStatus.已取消}','{TradeStatus.已完成}') ORDER BY {sort}";
             return DataProvider.GetConnection().Query<TradeBook>(sql);
         }
 
@@ -34,8 +34,8 @@ namespace AutoSniper.ClientWPF.Repositories
         /// <returns></returns>
         public static int BuyOrder(TradeBook model)
         {
-            var sql = $@"INSERT INTO TradeBook(TradeId,BuyOrderId,BuyPrice,BuyVolume,BuyTradeVolume,BuyAmount,SellOrderId,SellPrice,SellVolume,SellTradeVolume,SellAmount,Profit,Status,UpdateDate,CreateDate) 
-                       VALUES(NULL,'{model.BuyOrderId}',{model.BuyPrice},{model.BuyVolume},{model.BuyTradeVolume},{model.BuyAmount},'{model.SellOrderId}',{model.SellPrice},{model.SellVolume},{model.SellTradeVolume},{model.SellAmount},{model.Profit},'{model.Status}','{model.UpdateDate}','{model.CreateDate}')";
+            var sql = $@"INSERT INTO TradeBook(TradeId,BuyOrderId,BuyPrice,BuyVolume,BuyTradeVolume,BuyTradePrice,BuyAmount,SellOrderId,SellPrice,SellVolume,SellTradeVolume,SellTradePrice,SellAmount,Profit,Status,UpdateDate,CreateDate) 
+                       VALUES(NULL,'{model.BuyOrderId}',{model.BuyPrice},{model.BuyVolume},{model.BuyTradeVolume},{model.BuyTradePrice},{model.BuyAmount},'{model.SellOrderId}',{model.SellPrice},{model.SellVolume},{model.SellTradeVolume},{model.SellTradePrice},{model.SellAmount},{model.Profit},'{model.Status}','{model.UpdateDate}','{model.CreateDate}')";
             return DataProvider.GetConnection().Execute(sql);
         }
 
@@ -57,7 +57,7 @@ namespace AutoSniper.ClientWPF.Repositories
         /// <returns></returns>
         public static int CancelOrder(int tradeId)
         {
-            var sql = $"UPDATE TradeBook SET Status='{TradeStatus.Cancelled}' WHERE TradeId={tradeId}";
+            var sql = $"UPDATE TradeBook SET Status='{TradeStatus.已取消}' WHERE TradeId={tradeId}";
             return DataProvider.GetConnection().Execute(sql);
         }
     }

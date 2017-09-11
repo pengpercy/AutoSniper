@@ -34,9 +34,6 @@ namespace AutoSniper.ClientWPF.Services
             return ApiKey;
         }
 
-
-
-
         /// <summary>
         /// 获取用户资产以及安全认证设置信息
         /// </summary>
@@ -96,7 +93,8 @@ namespace AutoSniper.ClientWPF.Services
             try
             {
                 var queryString = new { method, GetApiKey().accesskey, price, amount, tradeType = (int)tradeType, currency }.ToQueryString();
-                json = url.MakeUrl(queryString, GetApiKey().secretkey).GetJsonFromUrl();
+                url = url.MakeUrl(queryString, GetApiKey().secretkey);
+                json = url.GetJsonFromUrl();
                 return json.FromJSON<ResponseModel>();
             }
             catch (Exception ex)
