@@ -137,6 +137,7 @@
     <Compile Include="WPFModules\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="WPFModules\ViewModels\SelectableViewModel.cs" />
     <Compile Include="WPFModules\ViewModels\BaseViewModel.cs" />
+    <Compile Include="WPFModules\ViewModels\TradeBookViewModel.cs" />
     <Compile Include="WPFModules\Views\GridsControl.xaml.cs">
       <DependentUpon>GridsControl.xaml</DependentUpon>
     </Compile>

@@ -276,7 +276,9 @@
                 <materialDesign:Card Margin="2,5,10,0"
                                      Background="#1b262d"
                                      Height="Auto">
-                    <local:TradeBookControl Height="510"
+                    <local:TradeBookControl Height="Auto" 
+                                            MinHeight="560" 
+                                            Width="Auto"
                                              Padding="10"></local:TradeBookControl>
                 </materialDesign:Card>
             </Grid>

@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AutoSniper.ClientWPF.WPFModules.Views"
              xmlns:vm="clr-namespace:AutoSniper.ClientWPF.WPFModules.ViewModels"
-             mc:Ignorable="d" 
-             >
+             xmlns:m="clr-namespace:AutoSniper.ClientWPF.WPFModules.Models"
+             DataContext="{Binding Source={StaticResource VMLocator}, Path=TradeBookVM}"
+             mc:Ignorable="d">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -15,99 +16,104 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Key="listBoxTemplate">
+                <Grid Width="Auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="800"/>
+                        <ColumnDefinition Width="200"/>
+                    </Grid.ColumnDefinitions>
+
+                    <WrapPanel Grid.Column="0">
+                        <StackPanel Orientation="Horizontal">
+                            <!--委托时间-->
+                            <TextBlock Grid.Row="0" 
+                               Grid.Column="0" 
+                               Text="{Binding CreateDate,StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}"/>
+
+                            <!--委托数量/已成交(BCC)-->
+                            <TextBlock Grid.Row="0" 
+                               Grid.Column="1" 
+                               Text="{Binding BuyVolume}"/>
+
+                            <!--成交总额(CNY)-->
+                            <TextBlock Grid.Row="0" 
+                               Grid.Column="2"
+                               Text="{Binding BuyPrice}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Grid.Row="1" 
+                               Grid.Column="0" 
+                               Text="{Binding UpdateDate,StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}"/>
+
+                            <TextBlock Grid.Row="1" 
+                               Grid.Column="1" 
+                               Text="{Binding SellVolume}"/>
+
+                            <TextBlock Grid.Row="1" 
+                               Grid.Column="2"
+                                Text="{Binding SellPrice}"/>
+                        </StackPanel>
+                    </WrapPanel>
+                    <StackPanel Orientation="Vertical">
+                        <!--状态-->
+                        <TextBlock Grid.RowSpan="2"
+                               Grid.Column="3"
+                               Grid.ColumnSpan="2"
+                               Text="{Binding Status}"/>
+
+                        <!--操作-->
+                        <TextBlock Grid.RowSpan="2"
+                               Grid.Column="4" 
+                               Grid.ColumnSpan="2"
+                               Text="{Binding TradeId}"/>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <ScrollViewer Width="Auto">
-        <Grid Background="#303e46" Width="Auto">
-            <Grid>
-                <Grid Margin="8" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+    <Grid Background="#303e46" Width="Auto">
+        <Grid>
+            <Grid Margin="8" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-                    <!--<TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}">ListBox</TextBlock>-->
+                <ListView Grid.Row="0">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView >
+                            <GridViewColumn Width="Auto"  Header="委托时间" />
+                            <GridViewColumn Width="Auto"  Header="委托数量/已成交(BCC)" />
+                            <GridViewColumn Width="Auto"  Header="委托价格/成交均价(CNY)" />
+                            <GridViewColumn Width="Auto"  Header="成交总额(CNY)" />
+                            <GridViewColumn Width="Auto"  Header="状态" />
+                            <GridViewColumn Width="Auto"  Header="操作" />
+                        </GridView>
 
-                    <ListView ItemsSource="{Binding ActiveTrades}" 
-                              SelectedItem="{Binding TradeBookModel, Mode=TwoWay}"
-                              Foreground="#dadfd3">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                <!--<Setter Property="Foreground" Value="#dadfd3"/>-->
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.View>
-                            <GridView >
-                                <GridViewColumn Width="Auto"  Header="委托时间"  />
-                                <GridViewColumn Width="Auto"  Header="委托数量/已成交(BCC)" />
-                                <GridViewColumn Width="Auto"  Header="委托价格/成交均价(CNY)" />
-                                <GridViewColumn Width="Auto"  Header="成交总额(CNY)" />
-                                <GridViewColumn Width="Auto"  Header="状态" />
-                                <GridViewColumn Width="Auto"  Header="操作" />
-                            </GridView>
-                        </ListView.View>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="35" />
-                                        <RowDefinition Height="35" />
-                                    </Grid.RowDefinitions>
+                    </ListView.View>
+                </ListView>
 
-                                    <!--委托时间-->
-                                    <TextBlock Grid.Row="0" 
-                                               Grid.Column="0" 
-                                               Text="{Binding CreateDate}"/>
-
-                                    <!--委托数量/已成交(BCC)-->
-                                    <TextBlock Grid.Row="0" 
-                                               Grid.Column="1" 
-                                               Text="{Binding BuyVolume}"/>
-
-                                    <!--成交总额(CNY)-->
-                                    <TextBlock Grid.Row="0" 
-                                               Grid.Column="2"
-                                               Text="{Binding BuyPrice}"/>
-
-
-
-
-                                    <TextBlock Grid.Row="1" 
-                                               Grid.Column="0" 
-                                               Text="{Binding UpdateDate}"/>
-                                    <TextBlock Grid.Row="1" 
-                                               Grid.Column="1" 
-                                               Text="{Binding SellVolume}"/>
-                                    <TextBlock Grid.Row="1" 
-                                               Grid.Column="2"
-                                               Text="{Binding SellPrice}"/>
-
-
-                                    <!--状态-->
-                                    <TextBlock Grid.RowSpan="2"
-                                               Grid.Column="3"
-                                               Grid.ColumnSpan="2"
-                                               Text="{Binding Status}"/>
-
-                                    <!--操作-->
-                                    <TextBlock Grid.RowSpan="2"
-                                               Grid.Column="4" 
-                                               Grid.ColumnSpan="2"
-                                               Text="{Binding TradeId}"/>
-
-
-                                </Grid>
-
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Grid>
+                <ListBox Grid.Row="1" 
+                         Width="Auto"
+                         Foreground="#999"
+                         SelectedItem="{Binding SelectItem,Mode=TwoWay}"
+                         ItemsSource="{Binding ActiveTrades,Mode=TwoWay}"
+                         ItemTemplate="{StaticResource listBoxTemplate}"/>
             </Grid>
         </Grid>
-    </ScrollViewer>
+    </Grid>
 </UserControl>

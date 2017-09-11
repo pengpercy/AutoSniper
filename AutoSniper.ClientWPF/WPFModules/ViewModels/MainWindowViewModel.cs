@@ -21,7 +21,7 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
             try
             {
                 AssetInfo = AccountServices.GetAssetInfo(Currency.bcc_cny);
-                ActiveTrades = new ObservableCollection<TradeBookModel>(TradeOrderServices.GetActiveTrades());
+                //ActiveTrades = new ObservableCollection<TradeBookModel>(TradeOrderServices.GetActiveTrades());
             }
             catch (Exception ex)
             {
@@ -37,7 +37,11 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
         public ObservableCollection<TradeBookModel> ActiveTrades
         {
             get { return _activeTrades; }
-            set { _activeTrades = value; }
+            set
+            {
+                _activeTrades = value;
+                OnPropertyChanged();
+            }
         }
 
         private AssetModel _asset;

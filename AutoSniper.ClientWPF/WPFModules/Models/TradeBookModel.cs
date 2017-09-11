@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoSniper.ClientWPF.WPFModules.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace AutoSniper.ClientWPF.WPFModules.Models
     /// <summary>
     /// 交易列表
     /// </summary>
-    public class TradeBookModel
+    public class TradeBookModel : BaseViewModel
     {
         /// <summary>
         /// 交易Id
@@ -71,10 +72,16 @@ namespace AutoSniper.ClientWPF.WPFModules.Models
         /// 交易利润
         /// </summary>
         public decimal Profit { get; set; }
+
+        private DateTime _createDate;
         /// <summary>
         /// 创建委托时间
         /// </summary>
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate
+        {
+            get { return _createDate; }
+            set { _createDate = value; }
+        }
         /// <summary>
         /// 更新委托时间
         /// </summary>

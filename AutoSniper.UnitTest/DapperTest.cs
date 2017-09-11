@@ -14,7 +14,7 @@ namespace AutoSniper.UnitTest
         public void InsertTest()
         {
             var trade = new TradeBook();
-            trade.BuyOrderId = "23524521335";
+            trade.BuyOrderId = "235245213353431";
             trade.BuyPrice = 13;
             trade.BuyVolume = 1;
             trade.BuyTradeVolume = 0;

@@ -23,5 +23,10 @@ namespace AutoSniper.ClientWPF.WPFModules.Utility
         {
             get { return container.Resolve<MainWindowViewModel>(); }
         }
+
+        public TradeBookViewModel TradeBookVM
+        {
+            get { return container.Resolve<TradeBookViewModel>(); }
+        }
     }
 }
