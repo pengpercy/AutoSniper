@@ -28,7 +28,7 @@ namespace AutoSniper.ClientWPF.Services.Models
         /// <summary>
         /// 挂单状态(0：待成交,1：取消,2：交易完成,3：待成交未交易部份)
         /// </summary>
-        public decimal Status { get; set; }
+        public int Status { get; set; }
         /// <summary>
         /// 挂单总数量
         /// </summary>
