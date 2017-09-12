@@ -27,7 +27,7 @@
                         <ColumnDefinition Width="140"/>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="80"/>
                         <ColumnDefinition Width="80"/>
                     </Grid.ColumnDefinitions>
@@ -139,12 +139,12 @@
                     </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView >
-                            <GridViewColumn Width="160" TextBlock.TextAlignment="Center" Header="委托时间" />
-                            <GridViewColumn Width="200" TextBlock.TextAlignment="Center"  Header="委托数量/已成交(BCC)" />
-                            <GridViewColumn Width="200" TextBlock.TextAlignment="Center"  Header="委托价格/成交均价(CNY)" />
-                            <GridViewColumn Width="80" TextBlock.TextAlignment="Center"  Header="成交总额(CNY)" />
-                            <GridViewColumn Width="80" TextBlock.TextAlignment="Center"  Header="状态" />
-                            <GridViewColumn Width="80" TextBlock.TextAlignment="Center"  Header="操作" />
+                            <GridViewColumn Width="160" TextBlock.TextAlignment="Center"  TextBlock.Foreground="#666c70" Header="委托时间" />
+                            <GridViewColumn Width="200" TextBlock.TextAlignment="Center"  TextBlock.Foreground="#666c70"  Header="委托数量/已成交(BCC)" />
+                            <GridViewColumn Width="200" TextBlock.TextAlignment="Center"  TextBlock.Foreground="#666c70"  Header="委托价格/成交均价(CNY)" />
+                            <GridViewColumn Width="100" TextBlock.TextAlignment="Center"  TextBlock.Foreground="#666c70"  Header="成交总额(CNY)" />
+                            <GridViewColumn Width="80" TextBlock.TextAlignment="Center"  TextBlock.Foreground="#666c70"  Header="状态" />
+                            <GridViewColumn Width="80" TextBlock.TextAlignment="Center"  TextBlock.Foreground="#666c70"  Header="操作" />
                         </GridView>
 
                     </ListView.View>

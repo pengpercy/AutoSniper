@@ -17,7 +17,7 @@ namespace AutoSniper.ClientWPF.Repositories
         public static IEnumerable<Currency> GetAllCurrency()
         {
             var data = RuntimeCache.BuildCache().Get<IEnumerable<Currency>>("CurrencyKey");
-            if (data.Any()) { return data; }
+            if (data != null && data.Any()) { return data; }
             var sql = "SELECT * FROM Currency WHERE CurrencyId > 0";
             data = DataProvider.GetConnection().Query<Currency>(sql);
             RuntimeCache.BuildCache().Put("CurrencyKey", data);

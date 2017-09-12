@@ -18,9 +18,9 @@ namespace AutoSniper.ClientWPF.Services.Models
     /// <summary>
     /// 货币类型
     /// </summary>
-    public enum Currency
+    public enum CurrencyType
     {
-        cny=0,
+        cny = 0,
         btc_cny = 1,
         ltc_cny = 2,
         eth_cny = 3,

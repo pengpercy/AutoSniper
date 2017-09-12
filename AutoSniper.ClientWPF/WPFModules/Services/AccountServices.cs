@@ -11,12 +11,12 @@ namespace AutoSniper.ClientWPF.WPFModules.Services
 {
     public class AccountServices
     {
-        public static async Task<AssetModel> GetAssetInfoAsync(Currency currency)
+        public static async Task<AssetModel> GetAssetInfoAsync(CurrencyType currency)
         {
             return await Task.Run(() => { return GetAssetInfo(currency); });
         }
 
-        public static AssetModel GetAssetInfo(Currency currency)
+        public static AssetModel GetAssetInfo(CurrencyType currency)
         {
             var asset = new AssetModel();
             var account = TradeServices.GetAccountInfo();

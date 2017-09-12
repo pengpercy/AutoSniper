@@ -30,7 +30,7 @@ namespace AutoSniper.UnitTest
             trade.Status = TradeStatus.买单中.ToString();
             trade.UpdateDate = DateTime.Now.ToString();
             trade.CreateDate = DateTime.Now.ToString();
-            var result = TradeBookRepository.BuyOrder(trade);
+            var result = TradeBookRepository.CrateTrade(trade);
             //var result = TradeBookRepository.CreateTradeBook2(trade);
             Assert.IsTrue(result == 1);
         }
@@ -45,7 +45,7 @@ namespace AutoSniper.UnitTest
         [TestMethod]
         public void GetOrderTest()
         {
-            var result = TradeBookRepository.GetActiveOrder().ToJson();
+            var result = TradeBookRepository.GetActiveTrade().ToJson();
             Assert.IsTrue(result.Any());
         }
 

@@ -28,12 +28,12 @@ create table TradeBook (
    CreateDate           nvarchar(128)              not null 
 );
 
-INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'BTC',0.0017,0.0001,10,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
-INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'LTC',0.0017,0.0001,1,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
-INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'ETH',0.00047,0.0001,1,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
-INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'ETC',0.00047,0.0001,1,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
-INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'BTS',0.00085,0.0004,0.0005,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
-INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'EOS',0.001,0.001,0.001,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
-INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'BCC',0.001,0.001,1,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
-INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'QTUM',0.001,0.001,0.1,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
-INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'HSR',0.001,0.001,0.1,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
+INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'BTC',0.0017,0.0017,10,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
+INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'LTC',0.0017,0.0017,1,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
+INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'ETH',0.0017,0.0017,1,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
+INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'ETC',0.0017,0.0017,1,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
+INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'BTS',0.0017,0.0017,0.001,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
+INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'EOS',0.002,0.002,0.001,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
+INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'BCC',0.002,0.002,1,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
+INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'QTUM',0.002,0.002,0.1,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));
+INSERT INTO Currency(CurrencyId,Name,TakerRate,MakerRate,DefaultProfit,UpdateDate,CreateDate) VALUES(NULL,'HSR',0.002,0.002,0.1,datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'));

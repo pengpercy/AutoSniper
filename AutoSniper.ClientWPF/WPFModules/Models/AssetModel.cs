@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoSniper.ClientWPF.WPFModules.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AutoSniper.ClientWPF.WPFModules.Models
 {
-    public class AssetModel
+    public class AssetModel : BaseViewModel
     {
         private string _currency;
         /// <summary>

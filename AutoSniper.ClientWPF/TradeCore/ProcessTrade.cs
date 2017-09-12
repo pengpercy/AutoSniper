@@ -10,12 +10,16 @@ using System.Threading.Tasks;
 
 namespace AutoSniper.ClientWPF.TradeCore
 {
+    /// <summary>
+    /// 定时任务，不断检查服务器中订单的成交情况，
+    /// 根据买单成交状态，及时委托卖单，保证手中不持数据货币
+    /// </summary>
     public class ProcessTrade
     {
-        public static Services.Models.Currency currency = Services.Models.Currency.bcc_cny;
+        public static Services.Models.CurrencyType currency = Services.Models.CurrencyType.bcc_cny;
         public static void CheckTradeOrder()
         {
-            var localActiveOrders = TradeBookRepository.GetActiveOrder();
+            var localActiveOrders = TradeBookRepository.GetActiveTrade();
             var remoteActiveOrders = GetRemoteActiveOrder(currency);
             var currencSetting = CurrencyRepository.GetCurrency(currency.ToString().Replace("_cny", "").ToUpper());
             foreach (var localOrder in localActiveOrders)
@@ -55,7 +59,7 @@ namespace AutoSniper.ClientWPF.TradeCore
         /// </summary>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public static List<OrderModel> GetRemoteActiveOrder(Services.Models.Currency currency)
+        public static List<OrderModel> GetRemoteActiveOrder(Services.Models.CurrencyType currency)
         {
             List<OrderModel> activeOrders = new List<OrderModel>();
             var pageIndex = 1;

@@ -24,7 +24,7 @@ namespace AutoSniper.ClientWPF.Services
         /// </summary>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public static TickerModel GetTicker(Currency currency)
+        public static TickerModel GetTicker(CurrencyType currency)
         {
             var json = string.Empty;
             var url = BaseUrl + $"ticker?currency={currency}";
@@ -60,7 +60,7 @@ namespace AutoSniper.ClientWPF.Services
         ///          hsr_cny : 可选1,0.1,0.0
         /// </param>
         /// <returns></returns>
-        public static DepthModel GetDepth(Currency currency, int size, decimal merge)
+        public static DepthModel GetDepth(CurrencyType currency, int size, decimal merge)
         {
             var json = string.Empty;
             var url = BaseUrl + $"depth?currency={currency}&size={size}&merge={merge}";
@@ -81,7 +81,7 @@ namespace AutoSniper.ClientWPF.Services
         /// </summary>
         /// <param name="currency">火币类型</param>
         /// <returns></returns>
-        public static List<TradesModel> GetTrades(Currency currency)
+        public static List<TradesModel> GetTrades(CurrencyType currency)
         {
             var json = string.Empty;
             var url = BaseUrl + $"trades?currency={currency}";
@@ -104,7 +104,7 @@ namespace AutoSniper.ClientWPF.Services
         /// <param name="since">从这个时间戳之后的</param>
         /// <param name="size">返回数据的条数限制(默认为1000，如果返回数据多于1000条，那么只返回1000条)</param>
         /// <returns></returns>
-        public static KlineModel GetKline(Currency currency, long since = 1417536000000, int size = 1000)
+        public static KlineModel GetKline(CurrencyType currency, long since = 1417536000000, int size = 1000)
         {
             var json = string.Empty;
             var url = BaseUrl + $"kline?currency={currency}&since={since}&size={size}";

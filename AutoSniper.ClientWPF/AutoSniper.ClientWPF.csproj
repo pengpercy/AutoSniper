@@ -149,6 +149,7 @@
     <Compile Include="WPFModules\Commands\RelayCommand.cs" />
     <Compile Include="WPFModules\Commands\RelayCommandAsync.cs" />
     <Compile Include="WPFModules\Models\AssetModel.cs" />
+    <Compile Include="WPFModules\Models\CreateTradeModel.cs" />
     <Compile Include="WPFModules\Models\TradeBookModel.cs" />
     <Compile Include="WPFModules\Services\AccountServices.cs" />
     <Compile Include="WPFModules\Services\TradeOrderServices.cs" />

@@ -20,7 +20,7 @@ namespace AutoSniper.ClientWPF.Repositories
         /// <param name="sortColumn">排序列名：UpdateDate，CreateDate</param>
         /// <param name="sortType">升降序: ASC，DESC</param>
         /// <returns></returns>
-        public static IEnumerable<TradeBook> GetActiveOrder(string sortColumn = "", string sortType = "")
+        public static IEnumerable<TradeBook> GetActiveTrade(string sortColumn = "", string sortType = "")
         {
             var sort = string.IsNullOrWhiteSpace(sortColumn) ? "UpdateDate DESC" : $" {sortColumn} {sortType}";
             var sql = $@"SELECT TradeId,BuyOrderId,BuyPrice,BuyVolume,BuyTradeVolume,BuyTradePrice,BuyAmount,SellOrderId,SellPrice,SellVolume,SellTradeVolume,SellTradePrice,SellAmount,Profit,Status,UpdateDate,CreateDate FROM TradeBook WHERE Status NOT IN ('{TradeStatus.已取消}','{TradeStatus.已完成}') ORDER BY {sort}";
@@ -32,7 +32,7 @@ namespace AutoSniper.ClientWPF.Repositories
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static int BuyOrder(TradeBook model)
+        public static int CrateTrade(TradeBook model)
         {
             var sql = $@"INSERT INTO TradeBook(TradeId,BuyOrderId,BuyPrice,BuyVolume,BuyTradeVolume,BuyTradePrice,BuyAmount,SellOrderId,SellPrice,SellVolume,SellTradeVolume,SellTradePrice,SellAmount,Profit,Status,UpdateDate,CreateDate) 
                        VALUES(NULL,'{model.BuyOrderId}',{model.BuyPrice},{model.BuyVolume},{model.BuyTradeVolume},{model.BuyTradePrice},{model.BuyAmount},'{model.SellOrderId}',{model.SellPrice},{model.SellVolume},{model.SellTradeVolume},{model.SellTradePrice},{model.SellAmount},{model.Profit},'{model.Status}','{model.UpdateDate}','{model.CreateDate}')";

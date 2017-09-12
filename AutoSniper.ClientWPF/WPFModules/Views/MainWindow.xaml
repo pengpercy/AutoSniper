@@ -70,6 +70,7 @@
                                  Margin="30,10"
                                  Background="#303e46"
                                  Padding="5,0,0,1"
+                                 Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"
                                  materialDesign:HintAssist.Hint="委托价格" >
                             <TextBox.Resources>
                                 <Style TargetType="{x:Type Border}">
@@ -85,6 +86,7 @@
                                  Margin="30,10"
                                  Background="#303e46"
                                  Padding="5,0,0,1"
+                                 Text="{Binding Volume, UpdateSourceTrigger=PropertyChanged}"
                                  materialDesign:HintAssist.Hint="委托数量" >
                             <TextBox.Resources>
                                 <Style TargetType="{x:Type Border}">
@@ -100,6 +102,7 @@
                                  Margin="30,10"
                                  Background="#303e46"
                                  Padding="5,0,0,1"
+                                 Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged}"
                                  materialDesign:HintAssist.Hint="交易额" >
                             <TextBox.Resources>
                                 <Style TargetType="{x:Type Border}">
@@ -121,6 +124,7 @@
                                 Content="现货买入"
                                 BorderBrush="#1b262d"
                                 Foreground="#dadfd3"
+                                Command="{Binding CreateTradeOrderCommand}"
                                 Background="#526c2e"/>
                     </StackPanel>
                 </materialDesign:Card>
@@ -279,7 +283,7 @@
                     <local:TradeBookControl Height="Auto" 
                                             MinHeight="560" 
                                             Width="Auto"
-                                             Padding="10"></local:TradeBookControl>
+                                            Padding="10"></local:TradeBookControl>
                 </materialDesign:Card>
             </Grid>
         </Grid>

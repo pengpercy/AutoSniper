@@ -7,9 +7,10 @@ using System.Linq;
 using AutoSniper.ClientWPF.Services;
 using Newtonsoft.Json.Linq;
 using AutoSniper.ClientWPF.Services.Models;
-using CurrencyEnum = AutoSniper.ClientWPF.Services.Models.Currency;
+using CurrencyEnum = AutoSniper.ClientWPF.Services.Models.CurrencyType;
 using System.Collections.Generic;
 using System.Web;
+using AutoSniper.ClientWPF.WPFModules.Services;
 
 namespace AutoSniper.UnitTest
 {
@@ -21,6 +22,13 @@ namespace AutoSniper.UnitTest
         {
             var data = TradeServices.GetAccountInfo();
             Assert.IsTrue(data.AuthGoogleEnabled);
+        }
+
+        [TestMethod]
+        public void CreateTradeTest()
+        {
+            var result = TradeOrderServices.CreateTrade(CurrencyEnum.bcc_cny, 10, 0.001m, 1);
+            Assert.IsTrue(result);
         }
     }
 }

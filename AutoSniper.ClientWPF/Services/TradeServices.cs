@@ -54,9 +54,9 @@ namespace AutoSniper.ClientWPF.Services
                 data.TotalAssets = obj["totalAssets"].Value<decimal>();
                 data.NetAssets = obj["netAssets"].Value<decimal>();
                 data.AssetsList = new Dictionary<string, Assets>();
-                Enum.GetValues(typeof(Currency)).Cast<Currency>().ToList().ForEach(m =>
+                Enum.GetValues(typeof(CurrencyType)).Cast<CurrencyType>().ToList().ForEach(m =>
                 {
-                    var i = Enum.GetName(typeof(Currency), m).Replace("_cny", "").ToUpper();
+                    var i = Enum.GetName(typeof(CurrencyType), m).Replace("_cny", "").ToUpper();
                     var asset = obj["balance"][i].ToObject<Assets>();
                     asset.Symbol = HttpUtility.UrlDecode(asset.Symbol);
                     asset.FrozenAmount = obj["frozen"][i]["amount"].Value<decimal>();
@@ -85,7 +85,7 @@ namespace AutoSniper.ClientWPF.Services
         /// <param name="tradeType">交易类型，buy,sell</param>
         /// <param name="currency">货币类型</param>
         /// <returns></returns>
-        public static ResponseModel Order(decimal price, decimal amount, TradeType tradeType, Currency currency)
+        public static ResponseModel Order(decimal price, decimal amount, TradeType tradeType, CurrencyType currency)
         {
             var json = string.Empty;
             var method = "order";
@@ -110,7 +110,7 @@ namespace AutoSniper.ClientWPF.Services
         /// <param name="orderId">委托挂单号</param>
         /// <param name="currency">货币类型</param>
         /// <returns></returns>
-        public static ResponseModel CancelOrder(string orderId, Currency currency)
+        public static ResponseModel CancelOrder(string orderId, CurrencyType currency)
         {
             var json = string.Empty;
             var method = "cancelOrder";
@@ -134,7 +134,7 @@ namespace AutoSniper.ClientWPF.Services
         /// <param name="orderId">委托挂单号</param>
         /// <param name="currency">交易类型（目前仅支持btc_cny/ltc_cny/eth_cny/eth_btc/etc_cny/bts_cny/eos_cny/bcc_cny/qtum_cny）</param>
         /// <returns></returns>
-        public static OrderModel GetOrder(string orderId, Currency currency)
+        public static OrderModel GetOrder(string orderId, CurrencyType currency)
         {
             var json = string.Empty;
             var method = "getOrder";
@@ -159,7 +159,7 @@ namespace AutoSniper.ClientWPF.Services
         /// <param name="currency">交易类型（目前仅支持btc_cny/ltc_cny/eth_cny/eth_btc/etc_cny/bts_cny/eos_cny/bcc_cny/qtum_cny）</param>
         /// <param name="pageIndex">当前页数</param>
         /// <returns></returns>
-        public static List<OrderModel> GetOrders(TradeType tradeType, Currency currency, int pageIndex)
+        public static List<OrderModel> GetOrders(TradeType tradeType, CurrencyType currency, int pageIndex)
         {
             var json = string.Empty;
             var method = "getOrders";
@@ -185,7 +185,7 @@ namespace AutoSniper.ClientWPF.Services
         /// <param name="pageIndex">当前页数</param>
         /// <param name="pageSize">每页数量</param>
         /// <returns></returns>
-        public static List<OrderModel> GetOrdersNew(TradeType tradeType, Currency currency, int pageIndex, int pageSize)
+        public static List<OrderModel> GetOrdersNew(TradeType tradeType, CurrencyType currency, int pageIndex, int pageSize)
         {
             var json = string.Empty;
             var method = "getOrdersNew";
@@ -210,7 +210,7 @@ namespace AutoSniper.ClientWPF.Services
         /// <param name="pageIndex">当前页数</param>
         /// <param name="pageSize">每页数量</param>
         /// <returns></returns>
-        public static List<OrderModel> GetOrdersIgnoreTradeType(Currency currency, int pageIndex, int pageSize)
+        public static List<OrderModel> GetOrdersIgnoreTradeType(CurrencyType currency, int pageIndex, int pageSize)
         {
             var json = string.Empty;
             var method = "getOrdersIgnoreTradeType";
@@ -235,7 +235,7 @@ namespace AutoSniper.ClientWPF.Services
         /// <param name="pageIndex">当前页数</param>
         /// <param name="pageSize">每页数量</param>
         /// <returns></returns>
-        public static List<OrderModel> GetUnfinishedOrdersIgnoreTradeType(Currency currency, int pageIndex, int pageSize)
+        public static List<OrderModel> GetUnfinishedOrdersIgnoreTradeType(CurrencyType currency, int pageIndex, int pageSize)
         {
             var json = string.Empty;
             var method = "getUnfinishedOrdersIgnoreTradeType";

@@ -109,9 +109,9 @@ namespace AutoSniper.UnitTest
             data.TotalAssets = obj["totalAssets"].Value<decimal>();
             data.NetAssets = obj["netAssets"].Value<decimal>();
             data.AssetsList = new Dictionary<string, Assets>();
-            Enum.GetValues(typeof(Currency)).Cast<Currency>().ToList().ForEach(m =>
+            Enum.GetValues(typeof(CurrencyType)).Cast<CurrencyType>().ToList().ForEach(m =>
             {
-                var i = Enum.GetName(typeof(Currency), m).Replace("_cny", "").ToUpper();
+                var i = Enum.GetName(typeof(CurrencyType), m).Replace("_cny", "").ToUpper();
                 var asset = obj["balance"][i].ToObject<Assets>();
                 asset.Symbol = HttpUtility.UrlDecode(asset.Symbol);
                 asset.FrozenAmount = obj["frozen"][i]["amount"].Value<decimal>();
