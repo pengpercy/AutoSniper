@@ -158,20 +158,14 @@
     <Compile Include="WPFModules\ViewModels\SelectableViewModel.cs" />
     <Compile Include="WPFModules\ViewModels\BaseViewModel.cs" />
     <Compile Include="WPFModules\ViewModels\TradeBookViewModel.cs" />
-    <Compile Include="WPFModules\Views\GridsControl.xaml.cs">
-      <DependentUpon>GridsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WPFModules\Views\GridTableControl.xaml.cs">
-      <DependentUpon>GridTableControl.xaml</DependentUpon>
+    <Compile Include="WPFModules\Views\ActiveTradeControl.xaml.cs">
+      <DependentUpon>ActiveTradeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPFModules\Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPFModules\Views\TradeBookControl.xaml.cs">
       <DependentUpon>TradeBookControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WPFModules\Views\TradeBooksControl.xaml.cs">
-      <DependentUpon>TradeBooksControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -190,11 +184,7 @@
     <Compile Include="Services\QuotationServices.cs" />
     <Compile Include="Services\SignUtility.cs" />
     <Compile Include="Services\TradeServices.cs" />
-    <Page Include="WPFModules\Views\GridsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WPFModules\Views\GridTableControl.xaml">
+    <Page Include="WPFModules\Views\ActiveTradeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -203,10 +193,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPFModules\Views\TradeBookControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WPFModules\Views\TradeBooksControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
