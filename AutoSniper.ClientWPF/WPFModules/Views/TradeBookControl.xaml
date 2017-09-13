@@ -150,7 +150,7 @@
                     </ListView.View>
                 </ListView>
 
-                <ListBox Grid.Row="1" 
+                <ListBox Name="TradeBookListBox" Grid.Row="1" 
                          Width="Auto"
                          Foreground="#999"
                          SelectedItem="{Binding SelectItem,Mode=TwoWay}"

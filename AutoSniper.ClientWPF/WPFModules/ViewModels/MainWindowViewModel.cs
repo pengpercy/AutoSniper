@@ -5,6 +5,7 @@ using AutoSniper.ClientWPF.WPFModules.Models;
 using AutoSniper.ClientWPF.WPFModules.Services;
 using AutoSniper.ClientWPF.WPFModules.Utility;
 using Microsoft.Practices.ServiceLocation;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,12 +25,32 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
             try
             {
                 AssetInfo = AccountServices.GetAssetInfo(CurrencyType.bcc_cny);
+                GetActiveTrades();
             }
             catch (Exception ex)
             {
                 Logger.Error(ex);
                 AssetInfo = new AssetModel();
             }
+        }
+
+        private ObservableCollection<TradeBookModel> _activeTrades;
+        /// <summary>
+        /// 活跃的交易数据集合
+        /// </summary>
+        public ObservableCollection<TradeBookModel> ActiveTrades
+        {
+            get { return _activeTrades; }
+            set
+            {
+                _activeTrades = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void GetActiveTrades()
+        {
+            ActiveTrades = TradeOrderServices.GetActiveTrades();
         }
 
         private CreateTradeModel _createTradeModel;
@@ -90,10 +111,6 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
             }
         }
 
-
-
-
-
         private ICommand _createTradeOrderCommand;
         public ICommand CreateTradeOrderCommand
         {
@@ -116,9 +133,9 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
                 {
                     //操作成功，更新资产面板
                     AssetInfo = AccountServices.GetAssetInfo(CurrencyType.bcc_cny);
-                    //ServiceLocator.Current.GetInstance<TradeBookViewModel>().ActiveTrades = TradeOrderServices.GetActiveTrades(); 
-                    //new TradeBookViewModel().ActiveTrades = TradeOrderServices.GetActiveTrades();
-                    new ViewModelLocator().TradeBookVM.ActiveTrades = TradeOrderServices.GetActiveTrades();
+                    GetActiveTrades();
+                    //ServiceLocator.Current.GetInstance<TradeBookViewModel>().GetActiveTrades();
+                    //new ViewModelLocator().TradeBookVM.ActiveTrades = TradeOrderServices.GetActiveTrades();
                 }
 
                 return result;

@@ -13,7 +13,7 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
     {
         public TradeBookViewModel()
         {
-            ActiveTrades = TradeOrderServices.GetActiveTrades();
+            GetActiveTrades();
         }
 
         private ObservableCollection<TradeBookModel> _activeTrades;
@@ -28,6 +28,11 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
                 _activeTrades = value;
                 OnPropertyChanged();
             }
+        }
+
+        public void GetActiveTrades()
+        {
+            ActiveTrades = TradeOrderServices.GetActiveTrades();
         }
 
         private TradeBookModel _selectItem;

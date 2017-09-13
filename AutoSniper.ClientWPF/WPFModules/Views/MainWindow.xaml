@@ -63,13 +63,12 @@
                                      Background="#1b262d"
                                      Foreground="#a4a9ac">
                     <StackPanel Orientation="Vertical">
-
                         <TextBox x:Name="BuyPrice" 
                                  Width="Auto" 
                                  Height="30"
                                  Margin="30,10"
                                  Background="#303e46"
-                                 Padding="5,0,0,1"
+                                 Padding="5,0,0,2"
                                  Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"
                                  materialDesign:HintAssist.Hint="委托价格" >
                             <TextBox.Resources>
@@ -85,7 +84,7 @@
                                  Height="30"
                                  Margin="30,10"
                                  Background="#303e46"
-                                 Padding="5,0,0,1"
+                                 Padding="5,0,0,2"
                                  Text="{Binding Volume, UpdateSourceTrigger=PropertyChanged}"
                                  materialDesign:HintAssist.Hint="委托数量" >
                             <TextBox.Resources>
@@ -101,7 +100,7 @@
                                  Height="30"
                                  Margin="30,10"
                                  Background="#303e46"
-                                 Padding="5,0,0,1"
+                                 Padding="5,0,0,2"
                                  Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged}"
                                  materialDesign:HintAssist.Hint="交易额" >
                             <TextBox.Resources>
@@ -280,10 +279,9 @@
                 <materialDesign:Card Margin="2,5,10,0"
                                      Background="#1b262d"
                                      Height="Auto">
-                    <local:TradeBookControl Height="Auto" 
-                                            MinHeight="560" 
+                    <local:ActiveTradeControl x:Name="TradeBookControl"
                                             Width="Auto"
-                                            Padding="10"></local:TradeBookControl>
+                                            Height="Auto"/>
                 </materialDesign:Card>
             </Grid>
         </Grid>
