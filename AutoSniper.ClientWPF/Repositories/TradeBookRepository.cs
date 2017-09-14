@@ -55,7 +55,7 @@ namespace AutoSniper.ClientWPF.Repositories
         /// </summary>
         /// <param name="tradeId"></param>
         /// <returns></returns>
-        public static int CancelOrder(int tradeId)
+        public static int CancelOrder(long tradeId)
         {
             var sql = $"UPDATE TradeBook SET Status='{TradeStatus.已取消}' WHERE TradeId={tradeId}";
             return DataProvider.GetConnection().Execute(sql);

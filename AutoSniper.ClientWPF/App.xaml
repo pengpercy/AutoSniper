@@ -41,11 +41,7 @@
             <SolidColorBrush x:Key="IdealForegroundColorBrush" Color="{DynamicResource Primary700Foreground}"/>
             <SolidColorBrush x:Key="IdealForegroundDisabledBrush" Color="{DynamicResource Primary700}" Opacity="0.3"/>
 
-
-
-
             <utiliy:ViewModelLocator x:Key="VMLocator"/>
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

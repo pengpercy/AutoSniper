@@ -154,9 +154,9 @@
     <Compile Include="WPFModules\Services\AccountServices.cs" />
     <Compile Include="WPFModules\Services\TradeOrderServices.cs" />
     <Compile Include="WPFModules\Utility\ViewModelLocator.cs" />
+    <Compile Include="WPFModules\ViewModels\ActiveTradeControlModel.cs" />
     <Compile Include="WPFModules\ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="WPFModules\ViewModels\SelectableViewModel.cs" />
-    <Compile Include="WPFModules\ViewModels\BaseViewModel.cs" />
+    <Compile Include="WPFModules\ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="WPFModules\ViewModels\TradeBookViewModel.cs" />
     <Compile Include="WPFModules\Views\ActiveTradeControl.xaml.cs">
       <DependentUpon>ActiveTradeControl.xaml</DependentUpon>

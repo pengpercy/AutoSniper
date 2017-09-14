@@ -4,12 +4,13 @@ using AutoSniper.ClientWPF.WPFModules.Commands;
 using AutoSniper.ClientWPF.WPFModules.Models;
 using AutoSniper.ClientWPF.WPFModules.Services;
 using AutoSniper.ClientWPF.WPFModules.Utility;
-using Microsoft.Practices.ServiceLocation;
-using Microsoft.Practices.Unity;
+using AutoSniper.ClientWPF.WPFModules.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,9 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
         {
             try
             {
+                CreateTradeModel = new CreateTradeModel();
                 AssetInfo = AccountServices.GetAssetInfo(CurrencyType.bcc_cny);
-                GetActiveTrades();
+                ActiveTradeControlModel = new ActiveTradeControlModel();
             }
             catch (Exception ex)
             {
@@ -34,25 +36,23 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
             }
         }
 
-        private ObservableCollection<TradeBookModel> _activeTrades;
         /// <summary>
-        /// 活跃的交易数据集合
+        /// 活跃订单数据集合
         /// </summary>
-        public ObservableCollection<TradeBookModel> ActiveTrades
+        private ActiveTradeControlModel _activeTradeControlModel;
+        public ActiveTradeControlModel ActiveTradeControlModel
         {
-            get { return _activeTrades; }
+            get { return _activeTradeControlModel; }
             set
             {
-                _activeTrades = value;
+                _activeTradeControlModel = value;
                 OnPropertyChanged();
             }
         }
 
-        public void GetActiveTrades()
-        {
-            ActiveTrades = TradeOrderServices.GetActiveTrades();
-        }
-
+        /// <summary>
+        /// 创建交易订单Form表单
+        /// </summary>
         private CreateTradeModel _createTradeModel;
         public CreateTradeModel CreateTradeModel
         {
@@ -64,10 +64,10 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
             }
         }
 
-        private AssetModel _asset;
         /// <summary>
-        /// 资产信息
+        /// 资产面板数据信息
         /// </summary>
+        private AssetModel _asset;
         public AssetModel AssetInfo
         {
             get { return _asset; }
@@ -78,45 +78,12 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
             }
         }
 
-        private decimal? _price;
-        public decimal? Price
-        {
-            get { return _price; }
-            set
-            {
-                _price = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private decimal? _volume;
-        public decimal? Volume
-        {
-            get { return _volume; }
-            set
-            {
-                _volume = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _amount;
-        public string Amount
-        {
-            get { return _amount; }
-            set
-            {
-                _amount = value;
-                OnPropertyChanged();
-            }
-        }
-
         private ICommand _createTradeOrderCommand;
         public ICommand CreateTradeOrderCommand
         {
             get
             {
-                if (_createTradeModel == null)
+                if (_createTradeOrderCommand == null)
                 {
                     _createTradeOrderCommand = new RelayCommandAsync(() => CreateTradeAsync());
                 }
@@ -128,16 +95,19 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
         {
             try
             {
-                bool result = await Task.Run(() => TradeOrderServices.CreateTrade(CurrencyType.bcc_cny, _price ?? 0, _volume ?? 0, CurrencyRepository.GetCurrency("BCC").DefaultProfit));
+                decimal price;
+                decimal volume;
+                if (!decimal.TryParse(_createTradeModel.Price, out price) ||
+                    !decimal.TryParse(_createTradeModel.Volume, out volume))
+                { return false; }
+                bool result = await TradeOrderServices.CreateTradeAsync(CurrencyType.bcc_cny, price, volume, CurrencyRepository.GetCurrency("BCC").DefaultProfit);
                 if (result)
                 {
-                    //操作成功，更新资产面板
-                    AssetInfo = AccountServices.GetAssetInfo(CurrencyType.bcc_cny);
-                    GetActiveTrades();
-                    //ServiceLocator.Current.GetInstance<TradeBookViewModel>().GetActiveTrades();
-                    //new ViewModelLocator().TradeBookVM.ActiveTrades = TradeOrderServices.GetActiveTrades();
+                    //更新资产面板
+                    AssetInfo = await AccountServices.GetAssetInfoAsync(CurrencyType.bcc_cny);
+                    //更新活跃订单列表
+                    ActiveTradeControlModel = new ActiveTradeControlModel();
                 }
-
                 return result;
             }
             catch (Exception ex)
@@ -147,17 +117,13 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
             }
         }
 
+        #region Event Handle
+        //public new event PropertyChangedEventHandler PropertyChanged;
 
-
-        private ICommand _getAssetCommand;
-        public ICommand GetAssetCommand
-        {
-            get
-            {
-                if (_getAssetCommand == null)
-                    _getAssetCommand = new RelayCommandAsync(() => AccountServices.GetAssetInfoAsync(CurrencyType.bcc_cny));
-                return _getAssetCommand;
-            }
-        }
+        //protected virtual new void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //}
+        #endregion
     }
 }

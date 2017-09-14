@@ -28,5 +28,10 @@ namespace AutoSniper.ClientWPF.WPFModules.Utility
         {
             get { return container.Resolve<TradeBookViewModel>(); }
         }
+
+        public ActiveTradeControlModel ActiveTradeVM
+        {
+            get { return container.Resolve<ActiveTradeControlModel>(); }
+        }
     }
 }

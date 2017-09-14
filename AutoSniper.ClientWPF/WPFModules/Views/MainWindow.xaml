@@ -19,6 +19,8 @@
         Width="1080"
         TitleCaps="False"
         ShowTitleBar="True">
+
+
     <Grid Background="#2c3940">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -36,7 +38,6 @@
                        Background="#1b262d"
                        Text="中国比特币交易助手"
                        TextAlignment="Center"/>
-
         </Grid>
 
         <Grid Grid.Row="1"
@@ -69,8 +70,9 @@
                                  Margin="30,10"
                                  Background="#303e46"
                                  Padding="5,0,0,2"
-                                 Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"
-                                 materialDesign:HintAssist.Hint="委托价格" >
+                                 Text="{Binding CreateTradeModel.Price,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 materialDesign:HintAssist.Hint="委托价格" 
+                                 TextChanged="NumberValidationTextBox" >
                             <TextBox.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="2"/>
@@ -85,8 +87,9 @@
                                  Margin="30,10"
                                  Background="#303e46"
                                  Padding="5,0,0,2"
-                                 Text="{Binding Volume, UpdateSourceTrigger=PropertyChanged}"
-                                 materialDesign:HintAssist.Hint="委托数量" >
+                                 Text="{Binding CreateTradeModel.Volume,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 materialDesign:HintAssist.Hint="委托数量" 
+                                 TextChanged="NumberValidationTextBox" >
                             <TextBox.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="2"/>
@@ -101,8 +104,9 @@
                                  Margin="30,10"
                                  Background="#303e46"
                                  Padding="5,0,0,2"
-                                 Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged}"
-                                 materialDesign:HintAssist.Hint="交易额" >
+                                 Text="{Binding CreateTradeModel.Amount,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 materialDesign:HintAssist.Hint="交易额" 
+                                 TextChanged="NumberValidationTextBox" >
                             <TextBox.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="2"/>
@@ -165,7 +169,7 @@
                                 Margin="0,0,0,10">
                             <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Center">
-                                <TextBlock Text="{Binding AssetInfo.AvailableBuyLabel , Mode=TwoWay}"
+                                <TextBlock Text="{Binding AssetInfo.Currency,StringFormat=可买{0} , Mode=TwoWay}"
                                        TextAlignment="Left"
                                        Foreground="#7b1a1f"
                                        Padding="20,2,5,2"
@@ -232,7 +236,7 @@
                                 BorderThickness="0,0,0,1" Margin="0,0,0,10">
                             <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Center">
-                                <TextBlock Text="{Binding AssetInfo.AvailableVolLabel , Mode=TwoWay}"
+                                <TextBlock Text="{Binding AssetInfo.Currency,StringFormat=可用{0}, Mode=TwoWay}"
                                        TextAlignment="Left"
                                        Foreground="#666c70"
                                        Padding="20,2,5,2"
@@ -277,9 +281,8 @@
             <Grid Grid.Column="1"
                   Name="Right">
                 <materialDesign:Card Margin="2,5,10,0"
-                                     Background="#1b262d"
-                                     Height="Auto">
-                    <local:ActiveTradeControl x:Name="TradeBookControl"
+                                     Background="#1b262d">
+                    <local:ActiveTradeControl DataContext="{Binding ActiveTradeControlModel}"
                                             Width="Auto"
                                             Height="Auto"/>
                 </materialDesign:Card>

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace AutoSniper.ClientWPF.WPFModules.ViewModels
+namespace AutoSniper.ClientWPF.WPFModules.ViewModels.Base
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

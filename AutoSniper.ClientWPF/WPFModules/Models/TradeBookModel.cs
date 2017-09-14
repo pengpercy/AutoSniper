@@ -1,4 +1,5 @@
-﻿using AutoSniper.ClientWPF.WPFModules.ViewModels;
+﻿using AutoSniper.ClientWPF.Repositories.Models;
+using AutoSniper.ClientWPF.WPFModules.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace AutoSniper.ClientWPF.WPFModules.Models
     /// <summary>
     /// 交易列表
     /// </summary>
-    public class TradeBookModel : BaseViewModel
+    public class TradeBookModel
     {
         /// <summary>
         /// 交易Id
@@ -67,7 +68,7 @@ namespace AutoSniper.ClientWPF.WPFModules.Models
         /// <summary>
         /// 交易状态
         /// </summary>
-        public string Status { get; set; }
+        public TradeStatus Status { get; set; }
         /// <summary>
         /// 交易利润
         /// </summary>

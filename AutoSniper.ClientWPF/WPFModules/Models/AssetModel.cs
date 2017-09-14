@@ -7,30 +7,16 @@ using System.Threading.Tasks;
 
 namespace AutoSniper.ClientWPF.WPFModules.Models
 {
-    public class AssetModel : BaseViewModel
+    public class AssetModel
     {
-        private string _currency;
         /// <summary>
         /// 货币类型
         /// </summary>
-        public string Currency
-        {
-            get { return _currency; }
-            set
-            {
-                _currency = value;
-                AvailableBuyLabel = $"可买{value}";
-                AvailableVolLabel = $"可用{value}";
-            }
-        }
+        public string Currency { get; set; }
         /// <summary>
         /// 可用CNY
         /// </summary>
         public decimal AvailableCNY { get; set; }
-        /// <summary>
-        /// 可买XXX
-        /// </summary>
-        public string AvailableBuyLabel { get; set; }
         /// <summary>
         /// 可买货币额度
         /// </summary>
@@ -43,10 +29,6 @@ namespace AutoSniper.ClientWPF.WPFModules.Models
         /// 净资产(RMB)
         /// </summary>
         public decimal NetAssets { get; set; }
-        /// <summary>
-        /// 可用XXX
-        /// </summary>
-        public string AvailableVolLabel { get; set; }
         /// <summary>
         /// 可用货币额度
         /// </summary>

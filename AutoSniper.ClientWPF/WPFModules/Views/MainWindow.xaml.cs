@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace AutoSniper.ClientWPF.WPFModules.Views
 {
@@ -23,5 +24,16 @@ namespace AutoSniper.ClientWPF.WPFModules.Views
         {
             InitializeComponent();
         }
+
+        private void NumberValidationTextBox(object sender, TextChangedEventArgs e)
+        {
+            var textBox = (TextBox)sender;
+            if (!new Regex(@"^\d+.?\d*$").IsMatch(textBox.Text))
+            {
+                textBox.Text = "";
+            }
+        }
+
+
     }
 }

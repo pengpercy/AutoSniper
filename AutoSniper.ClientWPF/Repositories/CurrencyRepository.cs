@@ -33,10 +33,5 @@ namespace AutoSniper.ClientWPF.Repositories
             return GetAllCurrency().FirstOrDefault(s => s.Name == name);
         }
 
-
-        //public static int UpdateCurrency(Currency currency)
-        //{
-
-        //}
     }
 }
