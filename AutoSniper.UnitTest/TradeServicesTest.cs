@@ -1,16 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AutoSniper.Framework.Converter;
-using AutoSniper.ClientWPF.Repositories.Models;
-using AutoSniper.ClientWPF.Repositories;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using AutoSniper.ClientWPF.Services;
-using Newtonsoft.Json.Linq;
-using AutoSniper.ClientWPF.Services.Models;
-using CurrencyEnum = AutoSniper.ClientWPF.Services.Models.CurrencyType;
-using System.Collections.Generic;
-using System.Web;
 using AutoSniper.ClientWPF.WPFModules.Services;
+using AutoSniper.ClientWPF.TradeCore;
+using AutoSniper.ClientWPF.Services.Models;
 
 namespace AutoSniper.UnitTest
 {
@@ -27,8 +20,15 @@ namespace AutoSniper.UnitTest
         [TestMethod]
         public void CreateTradeTest()
         {
-            var result = TradeOrderServices.CreateTrade(CurrencyEnum.bcc_cny, 10, 0.001m, 1);
+            var result = TradeOrderServices.CreateTrade(CurrencyType.bcc_cny, 10, 0.001m, 1);
             Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void GetRemoteActiveOrderTest()
+        {
+            var list = TradeServices.GetOrdersIgnoreTradeType(CurrencyType.bcc_cny, 1, 99);
+            Assert.IsTrue(list.Any());
         }
     }
 }

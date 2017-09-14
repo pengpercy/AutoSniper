@@ -252,5 +252,27 @@ namespace AutoSniper.ClientWPF.Services
             }
             return new List<OrderModel>();
         }
+
+        /// <summary>
+        /// 从服务器获取所有活跃订单
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public static List<OrderModel> GetAllRemoteActiveOrder(CurrencyType currency)
+        {
+            List<OrderModel> activeOrders = new List<OrderModel>();
+            var pageIndex = 1;
+            var flag = true;
+            while (flag)
+            {
+                var list = GetUnfinishedOrdersIgnoreTradeType(currency, pageIndex, 10);
+                flag = list.Count >= 10;
+                activeOrders.ForEach(s => { list.RemoveAll(q => q.Id == s.Id); });
+                if (!list.Any()) { continue; }
+                activeOrders.AddRange(list);
+                pageIndex += 1;
+            }
+            return activeOrders;
+        }
     }
 }

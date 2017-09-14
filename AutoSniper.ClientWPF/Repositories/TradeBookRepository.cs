@@ -32,7 +32,7 @@ namespace AutoSniper.ClientWPF.Repositories
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static int CrateTrade(TradeBook model)
+        public static int CrateOrder(TradeBook model)
         {
             var sql = $@"INSERT INTO TradeBook(TradeId,BuyOrderId,BuyPrice,BuyVolume,BuyTradeVolume,BuyTradePrice,BuyAmount,SellOrderId,SellPrice,SellVolume,SellTradeVolume,SellTradePrice,SellAmount,Profit,Status,UpdateDate,CreateDate) 
                        VALUES(NULL,'{model.BuyOrderId}',{model.BuyPrice},{model.BuyVolume},{model.BuyTradeVolume},{model.BuyTradePrice},{model.BuyAmount},'{model.SellOrderId}',{model.SellPrice},{model.SellVolume},{model.SellTradeVolume},{model.SellTradePrice},{model.SellAmount},{model.Profit},'{model.Status}','{model.UpdateDate}','{model.CreateDate}')";
@@ -44,9 +44,9 @@ namespace AutoSniper.ClientWPF.Repositories
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static int SellOrder(TradeBook model)
+        public static int UpdateOrder(TradeBook model)
         {
-            var sql = $@"UPDATE TradeBook SET BuyTradeVolume={model.BuyTradeVolume}, BuyAmount={model.BuyAmount},SellOrderId='{model.SellOrderId}',SellPrice={model.SellPrice},SellVolume={model.SellVolume},SellTradeVolume={model.SellTradeVolume},SellAmount={model.SellAmount},Status='{model.Status}',UpdateDate={DateTime.Now} WHERE TradeId={model.TradeId}";
+            var sql = $@"UPDATE TradeBook SET BuyTradeVolume={model.BuyTradeVolume},BuyTradePrice={model.BuyTradePrice}, BuyAmount={model.BuyAmount},SellOrderId='{model.SellOrderId}',SellPrice={model.SellPrice},SellVolume={model.SellVolume},SellTradeVolume={model.SellTradeVolume},SellTradePrice={model.SellTradePrice},SellAmount={model.SellAmount},Status='{model.Status}',UpdateDate='{DateTime.Now}' WHERE TradeId={model.TradeId}";
             return DataProvider.GetConnection().Execute(sql);
         }
 

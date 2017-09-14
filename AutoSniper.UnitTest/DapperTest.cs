@@ -30,7 +30,7 @@ namespace AutoSniper.UnitTest
             trade.Status = TradeStatus.买单中.ToString();
             trade.UpdateDate = DateTime.Now.ToString();
             trade.CreateDate = DateTime.Now.ToString();
-            var result = TradeBookRepository.CrateTrade(trade);
+            var result = TradeBookRepository.CrateOrder(trade);
             //var result = TradeBookRepository.CreateTradeBook2(trade);
             Assert.IsTrue(result == 1);
         }

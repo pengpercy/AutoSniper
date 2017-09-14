@@ -32,6 +32,7 @@ namespace AutoSniper.ClientWPF.WPFModules.Services
         public static ObservableCollection<TradeBookModel> GetActiveTrades()
         {
             var list = TradeBookRepository.GetActiveTrade();
+            list.ToList().ForEach(s => s.SellPrice = s.SellPrice.ToFixed(2));
             Mapper.Initialize(m => m.CreateMap<TradeBook, TradeBookModel>());
             return Mapper.Map<IEnumerable<TradeBook>, ObservableCollection<TradeBookModel>>(list);
         }
@@ -84,7 +85,7 @@ namespace AutoSniper.ClientWPF.WPFModules.Services
                 tradeBook.Status = TradeStatus.买单中.ToString();
                 tradeBook.UpdateDate = DateTime.Now.ToString();
                 tradeBook.CreateDate = DateTime.Now.ToString();
-                tradeId = TradeBookRepository.CrateTrade(tradeBook);
+                tradeId = TradeBookRepository.CrateOrder(tradeBook);
             }
             return result.Code == "1000" && tradeId > 0;
         }

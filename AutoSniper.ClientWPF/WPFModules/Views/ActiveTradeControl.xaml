@@ -111,14 +111,21 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ListBoxItem">
-                            <Border>
-                                <ContentPresenter/>
-                            </Border>
+                            <ContentPresenter />
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
-
+            <Style x:Key="statusTextBlock" TargetType="TextBlock">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Status}" Value="买单中">
+                        <Setter Property="Foreground" Value="#7b1a1f"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Status}" Value="卖单中">
+                        <Setter Property="Foreground" Value="#526c2e"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListBox.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
@@ -300,24 +307,18 @@
                     </Border>
                     <TextBlock Grid.Column="1" 
                                Text="{Binding Status}"
-                               Foreground="#b6b8b9"  
+                               Style="{StaticResource statusTextBlock}"
                                HorizontalAlignment="Center" 
                                VerticalAlignment="Center"/>
-                    <TextBlock Grid.Column="2" 
-                               Text="取消"
-                               Foreground="#b6b8b9" 
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Cursor="Hand"
-                               Style="{StaticResource MaterialDesignButtonTextBlock}"
-                               TextDecorations="Underline">
-                        <TextBlock.InputBindings>
-                            <MouseBinding
-                                    Command="{Binding DataContext.CancelTradeOrderCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Control}}"
-                                    CommandParameter="{Binding DataContext.SelectItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Control}}"
-                                    MouseAction="LeftClick" />
-                        </TextBlock.InputBindings>
-                    </TextBlock>
+                    <Button Grid.Column="2"
+                            Content="取消"
+                            BorderThickness="0"
+                            Background="#2c3940"
+                            Foreground="#b6b8b9" 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Command="{Binding ActiveTradeControlModel.CancelTradeOrderCommand}"
+                            Cursor="Hand" />
                     <Border BorderThickness="0,0,0,1" 
                             BorderBrush="#1b262d"
                             Grid.Column="1"

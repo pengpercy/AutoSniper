@@ -19,8 +19,132 @@
         Width="1080"
         TitleCaps="False"
         ShowTitleBar="True">
-
-
+    <Window.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="customBlueBrushOpacity" 
+                         Color="LightGray" 
+                         Opacity="0.11"/>
+            <Style x:Key="calcyListbox"  
+               TargetType="ListBox">
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBox">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="35"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" 
+                                  Height="30"  
+                                  VerticalAlignment="Top" 
+                                  Background="#303e46">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="6*"/>
+                                        <ColumnDefinition Width="7*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="委托时间"
+                                           x:Name="headCol0"
+                                           FontSize="13"
+                                           FontWeight="Medium"
+                                           Foreground="#b6b8b9" 
+                                           SnapsToDevicePixels="True" 
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center" ></TextBlock>
+                                    <TextBlock Text="委托数量/已成交(BCC)" 
+                                           x:Name="headCol1"
+                                           FontSize="13" 
+                                           FontWeight="Medium"
+                                           Foreground="#b6b8b9" 
+                                           SnapsToDevicePixels="True"  
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center" 
+                                           Grid.Column="1"></TextBlock>
+                                    <TextBlock Text="委托价格/成交均价(CNY)" 
+                                           x:Name="headCol2"
+                                           FontSize="13" 
+                                           FontWeight="Medium"
+                                           Foreground="#b6b8b9" 
+                                           SnapsToDevicePixels="True"  
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center"  
+                                           Grid.Column="2"></TextBlock>
+                                    <TextBlock Text="成交总额(CNY)" 
+                                           x:Name="headCol3"
+                                           FontSize="13" 
+                                           FontWeight="Medium"
+                                           Foreground="#b6b8b9" 
+                                           SnapsToDevicePixels="True"  
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center"  
+                                           Grid.Column="3"></TextBlock>
+                                    <TextBlock Text="状态" 
+                                           x:Name="headCol4"
+                                           FontSize="13" 
+                                           FontWeight="Medium"
+                                           Foreground="#b6b8b9" 
+                                           SnapsToDevicePixels="True"  
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center"  
+                                           Grid.Column="4"></TextBlock>
+                                    <TextBlock Text="操作" 
+                                           x:Name="headCol5"
+                                           FontSize="13" 
+                                           FontWeight="Medium"
+                                           Foreground="#b6b8b9" 
+                                           SnapsToDevicePixels="True"  
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center"  
+                                           Grid.Column="5"></TextBlock>
+                                </Grid>
+                                <Border Grid.Row="1" 
+                                    SnapsToDevicePixels="True"  
+                                    Background="Transparent" 
+                                    BorderBrush="{TemplateBinding BorderBrush}" 
+                                    BorderThickness="1">
+                                    <ScrollViewer x:Name="ScrollViewer"  
+                                              Padding="{TemplateBinding Padding}" 
+                                              Background="{TemplateBinding Background}" 
+                                              BorderBrush="Transparent" BorderThickness="0">
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="noStyleToListboxItem" TargetType="ListBoxItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <ContentPresenter />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="statusTextBlock" TargetType="TextBlock">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Status}" Value="买单中">
+                        <Setter Property="Foreground" Value="#7b1a1f"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Status}" Value="卖单中">
+                        <Setter Property="Foreground" Value="#526c2e"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid Background="#2c3940">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -282,9 +406,200 @@
                   Name="Right">
                 <materialDesign:Card Margin="2,5,10,0"
                                      Background="#1b262d">
-                    <local:ActiveTradeControl DataContext="{Binding ActiveTradeControlModel}"
-                                            Width="Auto"
-                                            Height="Auto"/>
+                    <ListBox SelectedItem="{Binding SelectItem,Mode=TwoWay}"
+                             ItemsSource="{Binding ActiveTrades,Mode=TwoWay}" 
+                             Background="{StaticResource customBlueBrushOpacity}"  
+                             x:Name="ActiveListBox" 
+                             SnapsToDevicePixels="True"
+                             OverridesDefaultStyle="True"
+                             FocusVisualStyle="{x:Null}"             
+                             ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                             Style="{StaticResource calcyListbox}" 
+                             Margin="0"
+                             ItemContainerStyle="{StaticResource noStyleToListboxItem}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="23*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" 
+                             BorderThickness="1,1,0,0" 
+                             Background="#1b262d" >
+                                        <StackPanel Orientation="Vertical">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="23"/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="5*"/>
+                                                    <ColumnDefinition Width="6*"/>
+                                                    <ColumnDefinition Width="7*"/>
+                                                    <ColumnDefinition Width="5*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Border BorderThickness="0,0,1,0" 
+                                                        BorderBrush="#2c3940" 
+                                                        Margin="-2" 
+                                                        Grid.Column="0"/>
+                                                <Border BorderThickness="0,0,1,0" 
+                                                        BorderBrush="#2c3940" 
+                                                        Margin="-2" 
+                                                        Grid.Column="1"/>
+                                                <Border BorderThickness="0,0,1,0" 
+                                                        BorderBrush="#2c3940" 
+                                                        Margin="-2" 
+                                                        Grid.Column="2"/>
+                                                <TextBlock Text="{Binding CreateDate,StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" 
+                                                           HorizontalAlignment="Center" 
+                                                           VerticalAlignment="Center"
+                                                           Foreground="#999" 
+                                                           Grid.Column="0"/>
+                                                <StackPanel Orientation="Horizontal"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                                                    <TextBlock Text="买"
+                                               Padding="2,0,2,0"
+                                               Background="#7b1a1f"
+                                               Foreground="White"
+                                               Margin="0,0,5,0"/>
+                                                    <TextBlock Text="{Binding BuyVolume}" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="#7b1a1f"/>
+                                                    <TextBlock Text=" / "
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="#999"/>
+                                                    <TextBlock Text="{Binding BuyTradeVolume}"
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="#7b1a1f"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal"
+                                            Grid.Column="2"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding BuyPrice}" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="#7b1a1f"/>
+                                                    <TextBlock Text=" / "
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="#999"/>
+                                                    <TextBlock Text="{Binding BuyTradePrice}"
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="#7b1a1f"/>
+                                                </StackPanel>
+                                                <TextBlock Text="{Binding BuyTradeAmount}" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="#999"   
+                                               Grid.Column="3"/>
+                                            </Grid>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="23"/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="5*"/>
+                                                    <ColumnDefinition Width="6*"/>
+                                                    <ColumnDefinition Width="7*"/>
+                                                    <ColumnDefinition Width="5*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Border BorderThickness="0,0,1,0" 
+                                            BorderBrush="#2c3940" 
+                                            Margin="-2" 
+                                            Grid.Column="0"/>
+                                                <Border BorderThickness="0,0,1,0" 
+                                            BorderBrush="#2c3940" 
+                                            Margin="-2" 
+                                            Grid.Column="1"/>
+                                                <Border BorderThickness="0,0,1,0" 
+                                            BorderBrush="#2c3940" 
+                                            Margin="-2" 
+                                            Grid.Column="2"/>
+                                                <TextBlock Text="{Binding UpdateDate,StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="#999"  
+                                               Grid.Column="0"/>
+                                                <StackPanel Orientation="Horizontal"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                                                    <TextBlock Text="卖"
+                                               Padding="2,0,2,0"
+                                               Background="#526c2e"
+                                               Foreground="White"
+                                               Margin="0,0,5,0"/>
+                                                    <TextBlock Text="{Binding SellVolume}" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="#526c2e"/>
+                                                    <TextBlock Text=" / "
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="#999"/>
+                                                    <TextBlock Text="{Binding SellTradeVolume}"
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="#526c2e"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal"
+                                            Grid.Column="2"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding SellPrice}" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="#526c2e"/>
+                                                    <TextBlock Text=" / "
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="#999"/>
+                                                    <TextBlock Text="{Binding SellTradePrice}"
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="#526c2e"/>
+                                                </StackPanel>
+                                                <TextBlock Text="{Binding SellTradeAmount}" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="#999"   
+                                               Grid.Column="3"/>
+                                            </Grid>
+                                        </StackPanel>
+                                    </Border>
+                                    <TextBlock Grid.Column="1" 
+                               Text="{Binding Status}"
+                               Style="{StaticResource statusTextBlock}"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"/>
+                                    <Button Grid.Column="2"
+                            Content="取消"
+                            BorderThickness="0"
+                            Background="#2c3940"
+                            Foreground="#b6b8b9" 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Command="{Binding DataContext.CancelTradeOrderCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
+                            CommandParameter="{Binding SelectItem, ElementName=ActiveListBox}"
+                            Cursor="Hand" />
+                                    <Border BorderThickness="0,0,0,1" 
+                            BorderBrush="#1b262d"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </materialDesign:Card>
             </Grid>
         </Grid>
