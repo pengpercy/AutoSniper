@@ -29,8 +29,8 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
             try
             {
                 CreateTradeModel = new CreateTradeModel();
-                AssetInfo = AccountServices.GetAssetInfo(CurrencyType.bcc_cny);
-                ActiveTrades = TradeOrderServices.GetActiveTrades();
+                Task.Run(() => { ActiveTrades = TradeOrderServices.GetActiveTrades(); });
+                Task.Run(() => { AssetInfo = AccountServices.GetAssetInfo(CurrencyType.bcc_cny); });
                 Task.Run(() => CheckOrder());
             }
             catch (Exception ex)
