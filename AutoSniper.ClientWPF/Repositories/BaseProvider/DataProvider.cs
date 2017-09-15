@@ -7,6 +7,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AutoSniper.ClientWPF.Repositories.BaseProvider
@@ -17,7 +18,7 @@ namespace AutoSniper.ClientWPF.Repositories.BaseProvider
         public static SQLiteConnection GetConnection()
         {
             if (Connection != null) { return Connection; }
-            var dbFilePath = "./AutoSniper.db";
+            var dbFilePath = "./AppData/AutoSniper.db";
             var connectionString = string.Format("Data Source={0};Version=3;", dbFilePath);
             if (File.Exists(dbFilePath))
             {
@@ -26,11 +27,11 @@ namespace AutoSniper.ClientWPF.Repositories.BaseProvider
                 return Connection;
             }
 
-            //首次启动，创建数据库和表格，返回链接对象
+            //首次启动，创建数据库和表格，返回连接对象
             SQLiteConnection.CreateFile(dbFilePath);
             Connection = new SQLiteConnection(connectionString);
             Connection.Open();
-            Connection.Execute(File.ReadAllText("../../AppData/Database.sql"));
+            Connection.Execute(File.ReadAllText("./AppData/Database.sql"));
             return Connection;
         }
     }

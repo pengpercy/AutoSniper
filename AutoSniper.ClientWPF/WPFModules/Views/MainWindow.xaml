@@ -160,7 +160,7 @@
                        FontWeight="Bold"
                        Foreground="#b6b8b9"
                        Background="#1b262d"
-                       Text="中国比特币交易助手"
+                       Text="比特币交易助手"
                        TextAlignment="Center"/>
         </Grid>
 
@@ -406,10 +406,10 @@
                   Name="Right">
                 <materialDesign:Card Margin="2,5,10,0"
                                      Background="#1b262d">
-                    <ListBox SelectedItem="{Binding SelectItem,Mode=TwoWay}"
+                    <ListBox SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
                              ItemsSource="{Binding ActiveTrades,Mode=TwoWay}" 
                              Background="{StaticResource customBlueBrushOpacity}"  
-                             x:Name="ActiveListBox" 
+                             x:Name="ActiveOrderListBox" 
                              SnapsToDevicePixels="True"
                              OverridesDefaultStyle="True"
                              FocusVisualStyle="{x:Null}"             
@@ -578,24 +578,39 @@
                                         </StackPanel>
                                     </Border>
                                     <TextBlock Grid.Column="1" 
-                               Text="{Binding Status}"
-                               Style="{StaticResource statusTextBlock}"
-                               HorizontalAlignment="Center" 
-                               VerticalAlignment="Center"/>
-                                    <Button Grid.Column="2"
-                            Content="取消"
-                            BorderThickness="0"
-                            Background="#2c3940"
-                            Foreground="#b6b8b9" 
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Command="{Binding DataContext.CancelTradeOrderCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
-                            CommandParameter="{Binding SelectItem, ElementName=ActiveListBox}"
-                            Cursor="Hand" />
+                                               Text="{Binding Status}"
+                                               Style="{StaticResource statusTextBlock}"
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"/>
+                                    <!--<Button Grid.Column="2"
+                                            Content="取消"
+                                            BorderThickness="0"
+                                            Background="#2c3940"
+                                            Foreground="#b6b8b9" 
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Command="{Binding DataContext.CancelTradeOrderCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
+                                            CommandParameter="{Binding DataContext.SelectedItem, ElementName=ActiveOrderListBox}"
+                                            Cursor="Hand" />-->
+                                    <TextBlock Grid.Column="2" 
+                                               Text="取消"
+                                               Cursor="Hand"
+                                               TextDecorations="UnderLine"
+                                               Foreground="#b6b8b9" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center">
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding Command="{Binding DataContext.CancelTradeOrderCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                                          CommandParameter="{Binding DataContext.SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                                          MouseAction="LeftClick" />
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>
+
                                     <Border BorderThickness="0,0,0,1" 
-                            BorderBrush="#1b262d"
-                            Grid.Column="1"
-                            Grid.ColumnSpan="2"/>
+                                            BorderBrush="#1b262d"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="2"/>
+
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

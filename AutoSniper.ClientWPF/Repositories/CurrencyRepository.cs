@@ -1,14 +1,9 @@
 ﻿using AutoSniper.ClientWPF.Repositories.BaseProvider;
 using AutoSniper.ClientWPF.Repositories.Models;
 using AutoSniper.Framework.Cache;
-using CacheManager.Core;
 using Dapper;
-using DapperExtensions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoSniper.ClientWPF.Repositories
 {
@@ -22,10 +17,6 @@ namespace AutoSniper.ClientWPF.Repositories
             data = DataProvider.GetConnection().Query<Currency>(sql);
             RuntimeCache.BuildCache().Put("CurrencyKey", data);
             return data;
-
-            //eq相等 ne、neq不相等， gt大于， lt小于
-            //var predicate = Predicates.Field<Currency>(s => s.CurrencyId, Operator.Gt, 0);
-            //return DataProvider.GetConnection().GetList<Currency>();
         }
 
         public static Currency GetCurrency(string name)

@@ -1,23 +1,17 @@
 ﻿using AutoSniper.ClientWPF.Repositories;
+using AutoSniper.ClientWPF.Repositories.BaseProvider;
 using AutoSniper.ClientWPF.Repositories.Models;
 using AutoSniper.ClientWPF.Services.Models;
 using AutoSniper.ClientWPF.TradeCore;
 using AutoSniper.ClientWPF.WPFModules.Commands;
 using AutoSniper.ClientWPF.WPFModules.Models;
 using AutoSniper.ClientWPF.WPFModules.Services;
-using AutoSniper.ClientWPF.WPFModules.Utility;
 using AutoSniper.ClientWPF.WPFModules.ViewModels.Base;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace AutoSniper.ClientWPF.WPFModules.ViewModels
@@ -28,9 +22,11 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
         {
             try
             {
+                //初始化数据库连接
+                DataProvider.GetConnection();
+                //开启多线程，加快启动速度
                 CreateTradeModel = new CreateTradeModel();
-                Task.Run(() => { ActiveTrades = TradeOrderServices.GetActiveTrades(); });
-                Task.Run(() => { AssetInfo = AccountServices.GetAssetInfo(CurrencyType.bcc_cny); });
+                Task.Run(() => { LoadData(); });
                 Task.Run(() => CheckOrder());
             }
             catch (Exception ex)
@@ -54,7 +50,6 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
                 Thread.Sleep(TimeSpan.FromSeconds(2));
             }
         }
-
 
         /// <summary>
         /// 创建交易订单Form表单
@@ -109,10 +104,8 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
                 bool result = await TradeOrderServices.CreateTradeAsync(CurrencyType.bcc_cny, price, volume, CurrencyRepository.GetCurrency("BCC").DefaultProfit);
                 if (result)
                 {
-                    //更新资产面板
-                    AssetInfo = await AccountServices.GetAssetInfoAsync(CurrencyType.bcc_cny);
-                    //更新活跃订单列表
-                    ActiveTrades = TradeOrderServices.GetActiveTrades();
+                    //更新活跃订单列表 
+                    LoadData();
                     CreateTradeModel = new CreateTradeModel();
                 }
                 return result;
@@ -124,6 +117,16 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
             }
         }
 
+        /// <summary>
+        /// 加载数据
+        /// </summary>
+        public async void LoadData()
+        {
+            //更新资产面板
+            AssetInfo = await AccountServices.GetAssetInfoAsync(CurrencyType.bcc_cny);
+            ActiveTrades = await TradeOrderServices.GetActiveTradesAsync();
+            SelectedItem = ActiveTrades.FirstOrDefault();
+        }
 
         private ObservableCollection<TradeBookModel> _activeTrades;
         /// <summary>
@@ -139,14 +142,17 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
             }
         }
 
-        private TradeBookModel _selectItem;
-        public TradeBookModel SelectItem
+        private TradeBookModel _selectedItem;
+        public TradeBookModel SelectedItem
         {
-            get { return _selectItem; }
+            get { return _selectedItem; }
             set
             {
-                _selectItem = value;
-                OnPropertyChanged("SelectItem");
+                if (value != _selectedItem)
+                {
+                    _selectedItem = value;
+                    OnPropertyChanged("SelectedItem");
+                }
             }
         }
 
@@ -168,14 +174,9 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
 
         private async Task<bool> CancelOrderAsync()
         {
-            var orderId = TradeStatus.买单中 == _selectItem.Status ? _selectItem.BuyOrderId : _selectItem.SellOrderId;
-            var result = await TradeOrderServices.CancelTradeAsync(CurrencyType.bcc_cny, _selectItem.TradeId, orderId);
-            if (result)
-            {
-                //更新活跃订单列表
-                ActiveTrades = TradeOrderServices.GetActiveTrades();
-                //TODO 更新资产面板
-            }
+            var orderId = TradeStatus.买单中 == _selectedItem.Status ? _selectedItem.BuyOrderId : _selectedItem.SellOrderId;
+            var result = await TradeOrderServices.CancelTradeAsync(CurrencyType.bcc_cny, _selectedItem.TradeId, orderId);
+            if (result) { LoadData(); }
             return result;
         }
 

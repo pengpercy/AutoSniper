@@ -134,10 +134,10 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <ListBox SelectedItem="{Binding SelectItem,Mode=TwoWay}"
-             ItemsSource="{Binding ActiveTrades,Mode=TwoWay}" 
+    <ListBox ItemsSource="{Binding ActiveTrades,Mode=TwoWay}" 
+             SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
              Background="{StaticResource customBlueBrushOpacity}"  
-             x:Name="ManufacturerListBox" 
+             x:Name="ActiveOrderList" 
              SnapsToDevicePixels="True"
              OverridesDefaultStyle="True"
              FocusVisualStyle="{x:Null}"             
@@ -317,7 +317,8 @@
                             Foreground="#b6b8b9" 
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Command="{Binding ActiveTradeControlModel.CancelTradeOrderCommand}"
+                            Command="{Binding CancelTradeOrderCommand}"
+                            CommandParameter="{Binding SelectedItem, ElementName=ActiveOrderList}"
                             Cursor="Hand" />
                     <Border BorderThickness="0,0,0,1" 
                             BorderBrush="#1b262d"
