@@ -20,7 +20,7 @@ namespace AutoSniper.ClientWPF.TradeCore
 
         public static bool CheckTradeOrder(CurrencyType currency)
         {
-            //是否更新界面上的活跃订单列表
+            //是否更新过订单状态
             bool enableUpdate = false;
             var localActiveOrders = TradeBookRepository.GetActiveTrade();
             var remoteActiveOrders = TradeServices.GetOrdersIgnoreTradeType(currency, 1, 100);
@@ -28,11 +28,13 @@ namespace AutoSniper.ClientWPF.TradeCore
             foreach (var lOrder in localActiveOrders)
             {
                 var rOrder = remoteActiveOrders.FirstOrDefault(q => q.Id == lOrder.BuyOrderId || q.Id == lOrder.SellOrderId);
-                //如果匹配不到，则说明不是通过助手创建的订单，直接跳过。
-                if (rOrder == null) continue;
                 try
                 {
-
+                    //如果匹配不到，则直接通过订单Id查询远程订单详情
+                    var orderId = TradeStatus.买单中.ToString() == lOrder.Status ? lOrder.BuyOrderId : lOrder.SellOrderId;
+                    rOrder = rOrder ?? TradeServices.GetOrder(orderId, currency);
+                    //如果最后还是匹配不到，则说明不是通过助手创建的订单，不做任何处理，直接跳过。
+                    if (rOrder == null) { continue; };
                     //无论买单、卖单，如果是部分交易完成，则直接取消远程订单
                     if (rOrder.Status == 3)
                     {
@@ -44,8 +46,7 @@ namespace AutoSniper.ClientWPF.TradeCore
                     }
                     if (new[] { 2, 3 }.Contains(rOrder.Status) && rOrder.TradeType == TradeType.buy && lOrder.Status == TradeStatus.买单中.ToString())
                     {
-                        //ToDo 发送卖单请求，数据库更新状态
-                        //买单手续费= 已成交量 * 成交均价 * 委托挂单费率；
+                        //公式： 买单手续费= 已成交量 * 成交均价 * 委托挂单费率；
                         var buyFee = rOrder.TradeAmount * rOrder.TradePrice * currencSetting.MakerRate;
                         //预估卖单价格
                         var sellPrice = BudgetaryPrice(rOrder.TradeAmount, currencSetting.DefaultProfit, rOrder.Price, buyFee, currencSetting.MakerRate);
