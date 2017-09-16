@@ -38,7 +38,7 @@ namespace AutoSniper.ClientWPF.Repositories.Models
         /// <summary>
         /// 买单交易额
         /// </summary>
-        public decimal BuyAmount { get; set; }
+        public decimal BuyTradeAmount { get; set; }
         /// <summary>
         /// 卖单Id
         /// </summary>
@@ -62,7 +62,7 @@ namespace AutoSniper.ClientWPF.Repositories.Models
         /// <summary>
         /// 卖单交易额
         /// </summary>
-        public decimal SellAmount { get; set; }
+        public decimal SellTradeAmount { get; set; }
         /// <summary>
         /// 利润单价
         /// </summary>

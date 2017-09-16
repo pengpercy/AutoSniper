@@ -72,13 +72,13 @@ namespace AutoSniper.ClientWPF.WPFModules.Services
                 tradeBook.BuyOrderId = result.Id;
                 tradeBook.BuyPrice = price;
                 tradeBook.BuyVolume = volume;
-                tradeBook.BuyAmount = volume * price;
+                tradeBook.BuyTradeAmount = volume * price;
                 tradeBook.BuyTradePrice = 0;
                 tradeBook.BuyTradeVolume = 0;
                 tradeBook.SellOrderId = "";
                 tradeBook.SellPrice = 0;
                 tradeBook.SellVolume = 0;
-                tradeBook.SellAmount = 0;
+                tradeBook.SellTradeAmount = 0;
                 tradeBook.SellTradeVolume = 0;
                 tradeBook.SellTradePrice = 0;
                 tradeBook.Profit = profitPrice;

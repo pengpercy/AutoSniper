@@ -176,7 +176,7 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
         {
             var orderId = TradeStatus.买单中 == _selectedItem.Status ? _selectedItem.BuyOrderId : _selectedItem.SellOrderId;
             var result = await TradeOrderServices.CancelTradeAsync(CurrencyType.bcc_cny, _selectedItem.TradeId, orderId);
-            if (result) { LoadData(); }
+            LoadData();
             return result;
         }
 

@@ -5,7 +5,6 @@ using AutoSniper.ClientWPF.Services.Models;
 using AutoSniper.Framework.Converter;
 using AutoSniper.Framework.Logger;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace AutoSniper.ClientWPF.TradeCore
@@ -22,6 +21,7 @@ namespace AutoSniper.ClientWPF.TradeCore
         {
             //是否更新过订单状态
             bool enableUpdate = false;
+            bool isUpdate = false;
             var localActiveOrders = TradeBookRepository.GetActiveTrade();
             var remoteActiveOrders = TradeServices.GetOrdersIgnoreTradeType(currency, 1, 100);
             var currencSetting = CurrencyRepository.GetCurrency(currency.ToString().Replace("_cny", "").ToUpper());
@@ -50,7 +50,15 @@ namespace AutoSniper.ClientWPF.TradeCore
                         var buyFee = rOrder.TradeAmount * rOrder.TradePrice * currencSetting.MakerRate;
                         //预估卖单价格
                         var sellPrice = BudgetaryPrice(rOrder.TradeAmount, currencSetting.DefaultProfit, rOrder.Price, buyFee, currencSetting.MakerRate);
+
                         var result = TradeServices.Order(sellPrice, rOrder.TradeAmount, TradeType.sell, currency);
+                        if (result.Code == "2009")
+                        {
+                            Logger.Error($"账户余额不足，取消订单[{lOrder.TradeId}],返回结果：{result.ToJson()}");
+                            TradeBookRepository.CancelOrder(lOrder.TradeId ?? 0);
+                            enableUpdate = true;
+                            continue;
+                        }
                         if (result.Code != "1000")
                         {
                             Logger.Error($"创建远程卖单失败,对应本地订单[{lOrder.TradeId}],返回结果：{result.ToJson()}");
@@ -58,28 +66,39 @@ namespace AutoSniper.ClientWPF.TradeCore
                         }
                         lOrder.BuyTradeVolume = rOrder.TradeAmount;
                         lOrder.BuyTradePrice = rOrder.TradePrice;
-                        lOrder.BuyAmount = rOrder.TradeAmount * rOrder.TradePrice;
+                        lOrder.BuyTradeAmount = rOrder.TradeAmount * rOrder.TradePrice;
                         lOrder.SellOrderId = result.Id;
                         lOrder.SellPrice = sellPrice;
                         lOrder.SellVolume = rOrder.TradeAmount;
                         lOrder.Status = TradeStatus.卖单中.ToString();
                         enableUpdate = true;
+                        isUpdate = true;
+
                     }
                     else if (new[] { 2, 3 }.Contains(rOrder.Status) && rOrder.TradeType == TradeType.sell && lOrder.Status == TradeStatus.卖单中.ToString())
                     {
                         lOrder.SellTradePrice = rOrder.Price;
                         lOrder.SellTradeVolume = rOrder.TradeAmount;
-                        lOrder.SellAmount = rOrder.Price * rOrder.TradeAmount;
+                        lOrder.SellTradeAmount = rOrder.Price * rOrder.TradeAmount;
                         lOrder.Status = TradeStatus.已完成.ToString();
                         enableUpdate = true;
+                        isUpdate = true;
                     }
-                    if (enableUpdate)
+                    if (rOrder.Status == 1)
+                    {
+                        lOrder.Status = TradeStatus.已取消.ToString();
+                        TradeBookRepository.CancelOrder(lOrder.TradeId ?? 0);
+                        enableUpdate = true;
+                        //isUpdate = true;
+                    }
+                    if (isUpdate)
                     {
                         //根据匹配结果，更新本地订单状态
                         if (TradeBookRepository.UpdateOrder(lOrder) != 1)
                         {
                             Logger.Error($"更新本地订单[{lOrder.TradeId}]状态失败:买单中==>卖单中");
                         }
+                        isUpdate = false;
                     }
                 }
                 catch (Exception ex)

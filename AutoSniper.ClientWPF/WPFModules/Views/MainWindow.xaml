@@ -38,9 +38,9 @@
                                   Background="#303e46">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="5*"/>
-                                        <ColumnDefinition Width="6*"/>
                                         <ColumnDefinition Width="7*"/>
-                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="7*"/>
+                                        <ColumnDefinition Width="4*"/>
                                         <ColumnDefinition Width="3*"/>
                                         <ColumnDefinition Width="3*"/>
                                     </Grid.ColumnDefinitions>
@@ -190,6 +190,9 @@
                                     <Setter Property="BorderBrush" Value="#c1d0dc"/>
                                 </Style>
                             </TextBox.Resources>
+                            <TextBox.InputBindings>
+                                <KeyBinding Command="{Binding CreateTradeOrderCommand}" Key="Return"/>
+                            </TextBox.InputBindings>
                         </TextBox>
 
                         <TextBox x:Name="Volume" 
@@ -207,6 +210,9 @@
                                     <Setter Property="BorderBrush" Value="#c1d0dc"/>
                                 </Style>
                             </TextBox.Resources>
+                            <TextBox.InputBindings>
+                                <KeyBinding Command="{Binding CreateTradeOrderCommand}" Key="Return"/>
+                            </TextBox.InputBindings>
                         </TextBox>
 
                         <TextBox x:Name="TradeAmount" 
@@ -224,6 +230,9 @@
                                     <Setter Property="BorderBrush" Value="#c1d0dc"/>
                                 </Style>
                             </TextBox.Resources>
+                            <TextBox.InputBindings>
+                                <KeyBinding Command="{Binding CreateTradeOrderCommand}" Key="Return"/>
+                            </TextBox.InputBindings>
                         </TextBox>
 
                         <TextBlock Text="交易额以实际成交额为准"
@@ -423,9 +432,9 @@
                                                 </Grid.RowDefinitions>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="5*"/>
-                                                    <ColumnDefinition Width="6*"/>
                                                     <ColumnDefinition Width="7*"/>
-                                                    <ColumnDefinition Width="5*"/>
+                                                    <ColumnDefinition Width="7*"/>
+                                                    <ColumnDefinition Width="4*"/>
                                                 </Grid.ColumnDefinitions>
                                                 <Border BorderThickness="0,0,1,0" 
                                                         BorderBrush="#2c3940" 
@@ -457,26 +466,29 @@
                                                         <ColumnDefinition Width="10"/>
                                                         <ColumnDefinition Width="4*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <TextBlock Grid.Column="0"
-                                                               Text="买"
+                                                    <StackPanel Grid.Column="0" 
+                                                                Orientation="Horizontal"
+                                                                HorizontalAlignment="Right">
+                                                        <TextBlock Text="买"
                                                                Padding="2,0,2,0"
                                                                Background="#7b1a1f"
                                                                Foreground="White" 
+                                                               Margin="0,0,5,0"
                                                                HorizontalAlignment="Right" 
-                                                               VerticalAlignment="Center"
-                                                               Margin="0,0,10,0"/>
-                                                    <TextBlock Grid.Column="0"
-                                                               Text="{Binding BuyVolume}" 
+                                                               VerticalAlignment="Center"/>
+                                                        <TextBlock Text="{Binding BuyVolume,StringFormat={}{0:F3}}" 
+                                                               Width="Auto"
                                                                HorizontalAlignment="Right" 
                                                                VerticalAlignment="Center"
                                                                Foreground="#7b1a1f"/>
+                                                    </StackPanel>
                                                     <TextBlock Grid.Column="1"
                                                                Text="/"
                                                                HorizontalAlignment="Center" 
                                                                VerticalAlignment="Center"
                                                                Foreground="#999"/>
                                                     <TextBlock Grid.Column="2"
-                                                               Text="{Binding BuyTradeVolume}"
+                                                               Text="{Binding BuyTradeVolume,StringFormat={}{0:F3}}"
                                                                HorizontalAlignment="Left" 
                                                                VerticalAlignment="Center"
                                                                Foreground="#7b1a1f"/>
@@ -492,7 +504,7 @@
                                                     </Grid.ColumnDefinitions>
 
                                                     <TextBlock Grid.Column="0"
-                                                               Text="{Binding BuyPrice}" 
+                                                               Text="{Binding BuyPrice,StringFormat={}{0:F2}}" 
                                                                HorizontalAlignment="Right" 
                                                                VerticalAlignment="Center"
                                                                Foreground="#7b1a1f"/>
@@ -501,7 +513,7 @@
                                                                HorizontalAlignment="Center" 
                                                                VerticalAlignment="Center"
                                                                Foreground="#999"/>
-                                                    <TextBlock Grid.Column="2" Text="{Binding BuyTradePrice}"
+                                                    <TextBlock Grid.Column="2" Text="{Binding BuyTradePrice,StringFormat={}{0:F2}}"
                                                                HorizontalAlignment="Left" 
                                                                VerticalAlignment="Center"
                                                                Foreground="#7b1a1f"/>
@@ -519,9 +531,9 @@
                                                 </Grid.RowDefinitions>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="5*"/>
-                                                    <ColumnDefinition Width="6*"/>
                                                     <ColumnDefinition Width="7*"/>
-                                                    <ColumnDefinition Width="5*"/>
+                                                    <ColumnDefinition Width="7*"/>
+                                                    <ColumnDefinition Width="4*"/>
                                                 </Grid.ColumnDefinitions>
                                                 <Border BorderThickness="0,0,1,0" 
                                                         BorderBrush="#2c3940" 
@@ -553,24 +565,27 @@
                                                         <ColumnDefinition Width="10"/>
                                                         <ColumnDefinition Width="4*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <TextBlock Grid.Column="0" Text="卖"
+                                                    <StackPanel Grid.Column="0"
+                                                                Orientation="Horizontal"
+                                                                HorizontalAlignment="Right">
+                                                        <TextBlock Text="卖"
                                                                Padding="2,0,2,0" 
                                                                HorizontalAlignment="Right" 
                                                                VerticalAlignment="Center"
                                                                Background="#526c2e"
                                                                Foreground="White"
-                                                               Margin="0,0,10,0"/>
-                                                    <TextBlock Grid.Column="0"
-                                                               Text="{Binding SellVolume}" 
+                                                               Margin="0,0,5,0"/>
+                                                        <TextBlock Text="{Binding SellVolume,StringFormat={}{0:F3}}" 
                                                                HorizontalAlignment="Right" 
                                                                VerticalAlignment="Center"
                                                                Foreground="#526c2e"/>
+                                                    </StackPanel>
                                                     <TextBlock Grid.Column="1" Text=" / "
                                                                HorizontalAlignment="Center" 
                                                                VerticalAlignment="Center"
                                                                Foreground="#999"/>
                                                     <TextBlock Grid.Column="2"
-                                                               Text="{Binding SellTradeVolume}"
+                                                               Text="{Binding SellTradeVolume,StringFormat={}{0:F3}}"
                                                                HorizontalAlignment="Left" 
                                                                VerticalAlignment="Center"
                                                                Foreground="#526c2e"/>
@@ -585,7 +600,7 @@
                                                         <ColumnDefinition Width="1*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <TextBlock Grid.Column="0" 
-                                                               Text="{Binding SellPrice}" 
+                                                               Text="{Binding SellPrice,StringFormat={}{0:F2}}" 
                                                                HorizontalAlignment="Right" 
                                                                VerticalAlignment="Center"
                                                                Foreground="#526c2e"/>
@@ -595,7 +610,7 @@
                                                                VerticalAlignment="Center"
                                                                Foreground="#999"/>
                                                     <TextBlock Grid.Column="2"
-                                                               Text="{Binding SellTradePrice}"
+                                                               Text="{Binding SellTradePrice,StringFormat={}{0:F2}}"
                                                                HorizontalAlignment="Left" 
                                                                VerticalAlignment="Center"
                                                                Foreground="#526c2e"/>
@@ -608,6 +623,11 @@
                                             </Grid>
                                         </StackPanel>
                                     </Border>
+
+                                    <Border BorderThickness="1,0,0,0" 
+                                            BorderBrush="#2c3940"
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="2"/>
                                     <TextBlock Grid.Column="1" 
                                                Text="{Binding Status}"
                                                Style="{StaticResource statusTextBlock}"

@@ -19,13 +19,13 @@ namespace AutoSniper.UnitTest
             trade.BuyVolume = 1;
             trade.BuyTradeVolume = 0;
             trade.BuyTradePrice = 0;
-            trade.BuyAmount = 0;
+            trade.BuyTradeAmount = 0;
             trade.SellOrderId = "";
             trade.SellPrice = 3;
             trade.SellVolume = 0;
             trade.SellTradeVolume = 0;
             trade.SellTradePrice = 0;
-            trade.SellAmount = 0;
+            trade.SellTradeAmount = 0;
             trade.Profit = 1;
             trade.Status = TradeStatus.买单中.ToString();
             trade.UpdateDate = DateTime.Now.ToString();

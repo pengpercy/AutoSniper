@@ -20,6 +20,7 @@ namespace AutoSniper.ClientWPF.WPFModules.Services
         {
             var asset = new AssetModel();
             var account = TradeServices.GetAccountInfo();
+            if (account == null || account.AssetsList == null || !account.AssetsList.Any()) return new AssetModel();
             asset.Currency = currency.ToString().Replace("_cny", "").ToUpper();
             var currentAsset = account.AssetsList[asset.Currency];
             asset.AvailableVol = currentAsset.Amount;

@@ -32,6 +32,19 @@ namespace AutoSniper.ClientWPF.WPFModules.Views
             {
                 textBox.Text = "";
             }
+            var price = 0m;
+            var volume = 0m;
+            var amount = 0m;
+            if (decimal.TryParse(BuyPrice.Text, out price) && decimal.TryParse(Volume.Text, out volume))
+            {
+                amount = price * volume;
+                if (amount > 0)
+                {
+                    TradeAmount.Text = amount.ToString();
+                    return;
+                }
+            }
+            TradeAmount.Text = "";
         }
 
 
