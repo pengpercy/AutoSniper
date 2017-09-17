@@ -125,7 +125,6 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
             //更新资产面板
             AssetInfo = await AccountServices.GetAssetInfoAsync(CurrencyType.bcc_cny);
             ActiveTrades = await TradeOrderServices.GetActiveTradesAsync();
-            SelectedItem = ActiveTrades.FirstOrDefault();
         }
 
         private ObservableCollection<TradeBookModel> _activeTrades;
@@ -141,20 +140,7 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        private TradeBookModel _selectedItem;
-        public TradeBookModel SelectedItem
-        {
-            get { return _selectedItem; }
-            set
-            {
-                if (value != _selectedItem)
-                {
-                    _selectedItem = value;
-                    OnPropertyChanged("SelectedItem");
-                }
-            }
-        }
+       
 
         /// <summary>
         /// 取消订单
@@ -166,18 +152,17 @@ namespace AutoSniper.ClientWPF.WPFModules.ViewModels
             {
                 if (_cancelTradeOrder == null)
                 {
-                    _cancelTradeOrder = new RelayCommandAsync(() => CancelOrderAsync());
+                    _cancelTradeOrder = new RelayCommand(param => CancelOrderAsync((TradeBookModel)param));
                 }
                 return _cancelTradeOrder;
             }
         }
 
-        private async Task<bool> CancelOrderAsync()
+        private void CancelOrderAsync(TradeBookModel tradeBook)
         {
-            var orderId = TradeStatus.买单中 == _selectedItem.Status ? _selectedItem.BuyOrderId : _selectedItem.SellOrderId;
-            var result = await TradeOrderServices.CancelTradeAsync(CurrencyType.bcc_cny, _selectedItem.TradeId, orderId);
+            var orderId = TradeStatus.买单中 == tradeBook.Status ? tradeBook.BuyOrderId : tradeBook.SellOrderId;
+            var result = TradeOrderServices.CancelTrade(CurrencyType.bcc_cny, tradeBook.TradeId, orderId);
             LoadData();
-            return result;
         }
 
         #region Event Handle

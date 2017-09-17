@@ -41,7 +41,7 @@ namespace AutoSniper.ClientWPF.TradeCore
                         var result = TradeServices.CancelOrder(rOrder.Id, currency);
                         if (result.Code != "1000")
                         {
-                            Logger.Error($"远程订单[{rOrder.Id}]取消失败,返回结果：{result.ToJson()}");
+                            Logger.Info($"远程订单[{rOrder.Id}]取消失败,返回结果：{result.ToJson()}");
                         }
                     }
                     if (new[] { 2, 3 }.Contains(rOrder.Status) && rOrder.TradeType == TradeType.buy && lOrder.Status == TradeStatus.买单中.ToString())
@@ -54,14 +54,14 @@ namespace AutoSniper.ClientWPF.TradeCore
                         var result = TradeServices.Order(sellPrice, rOrder.TradeAmount, TradeType.sell, currency);
                         if (result.Code == "2009")
                         {
-                            Logger.Error($"账户余额不足，取消订单[{lOrder.TradeId}],返回结果：{result.ToJson()}");
+                            Logger.Info($"账户余额不足，取消订单[{lOrder.TradeId}],返回结果：{result.ToJson()}");
                             TradeBookRepository.CancelOrder(lOrder.TradeId ?? 0);
                             enableUpdate = true;
                             continue;
                         }
                         if (result.Code != "1000")
                         {
-                            Logger.Error($"创建远程卖单失败,对应本地订单[{lOrder.TradeId}],返回结果：{result.ToJson()}");
+                            Logger.Info($"创建远程卖单失败,对应本地订单[{lOrder.TradeId}],返回结果：{result.ToJson()}");
                             continue;
                         }
                         lOrder.BuyTradeVolume = rOrder.TradeAmount;

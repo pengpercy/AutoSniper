@@ -402,8 +402,7 @@
                   Name="Right">
                 <materialDesign:Card Margin="2,5,10,0"
                                      Background="#1b262d">
-                    <ListBox SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
-                             ItemsSource="{Binding ActiveTrades,Mode=TwoWay}" 
+                    <ListBox ItemsSource="{Binding ActiveTrades,Mode=TwoWay}" 
                              x:Name="ActiveOrderListBox" 
                              SnapsToDevicePixels="True"
                              OverridesDefaultStyle="True"
@@ -415,6 +414,7 @@
                             <DataTemplate>
                                 <Grid HorizontalAlignment="Stretch" 
                                       Margin="-8"
+                                      x:Name="itemGrid"
                                       Width="{Binding ElementName=activeListHeader,Path=ActualWidth}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="23*"/>
@@ -635,14 +635,15 @@
                                                VerticalAlignment="Center"/>
                                     <TextBlock Grid.Column="2" 
                                                Text="取消"
+                                               x:Name="cancelButton"
                                                Cursor="Hand"
                                                TextDecorations="UnderLine"
-                                               Foreground="#b6b8b9" 
+                                               Foreground="#b6b8b9"
                                                HorizontalAlignment="Center" 
                                                VerticalAlignment="Center">
                                         <TextBlock.InputBindings>
                                             <MouseBinding Command="{Binding DataContext.CancelTradeOrderCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
-                                                          CommandParameter="{Binding DataContext.SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                                          CommandParameter="{Binding ElementName=itemGrid,Path=DataContext}"                                                          
                                                           MouseAction="LeftClick" />
                                         </TextBlock.InputBindings>
                                     </TextBlock>

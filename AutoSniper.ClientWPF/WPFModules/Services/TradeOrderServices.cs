@@ -65,7 +65,7 @@ namespace AutoSniper.ClientWPF.WPFModules.Services
                 throw new Exception("主人很穷，测试下单就不要搞那么大数据了吧！");
             }
             var tradeId = 0;
-            var result = TradeServices.Order(price, volume, TradeType.buy, currency);
+            var result = new ResponseModel() { Code = "1000" };//TradeServices.Order(price, volume, TradeType.buy, currency);
             if (result.Code == "1000")
             {
                 var tradeBook = new TradeBook();
@@ -110,7 +110,6 @@ namespace AutoSniper.ClientWPF.WPFModules.Services
         /// <returns></returns>
         public static bool CancelTrade(CurrencyType currency, long tradeId, string orderId)
         {
-            //string orderId = TradeStatus.买单中 == status ? buyOrderId : sellOrderId;
             var remoteResult = TradeServices.CancelOrder(orderId, currency);
             var localResult = TradeBookRepository.CancelOrder(tradeId);
             return remoteResult.Code == "1000" && localResult == 1;
