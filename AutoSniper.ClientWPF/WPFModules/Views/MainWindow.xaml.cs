@@ -46,7 +46,5 @@ namespace AutoSniper.ClientWPF.WPFModules.Views
             }
             TradeAmount.Text = "";
         }
-
-
     }
 }
